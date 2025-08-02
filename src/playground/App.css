@@ -1,0 +1,108 @@
+.app {
+  min-height: 100vh;
+  background: #008080;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.playground-content {
+  padding: 10px;
+}
+
+.section {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #c0c0c0;
+  background: #f0f0f0;
+}
+
+.section h3 {
+  margin-top: 0;
+  color: #000080;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.component-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.component-group > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 120px;
+}
+
+.component-group label {
+  font-size: 11px;
+  color: #000;
+  font-weight: bold;
+}
+
+/* Windows 7 desktop background pattern */
+body {
+  margin: 0;
+  background: #008080;
+  background-image: 
+    radial-gradient(circle at 25% 25%, #008080 0%, #006060 50%, #004040 100%);
+}
+
+/* Custom scrollbar for playground */
+.playground-content::-webkit-scrollbar {
+  width: 16px;
+}
+
+.playground-content::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border: 1px solid #c0c0c0;
+}
+
+.playground-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #f8f8f8, #e0e0e0);
+  border: 1px solid #c0c0c0;
+}
+
+.playground-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #e8e8e8, #d0d0d0);
+}
+
+/* Custom playground styles */
+.custom-listview {
+  height: 120px;
+  width: 180px;
+}
+
+.custom-treeview {
+  height: 120px;
+  width: 250px;
+  border: 1px solid #ccc;
+  overflow-y: auto;
+}
+
+.custom-balloon {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app {
+    padding: 10px;
+  }
+  
+  .component-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .component-group > div {
+    min-width: auto;
+  }
+}

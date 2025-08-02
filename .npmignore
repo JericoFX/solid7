@@ -1,0 +1,49 @@
+# Source files
+src/
+playground/
+playground-dist/
+index.html
+
+# Development files
+vite.config.ts
+tsconfig.json
+tsconfig.node.json
+.eslintrc.js
+
+# Documentation (keep README.md)
+docs/
+
+# Development dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Testing
+coverage/
+*.lcov
+.nyc_output
+
+# Logs
+*.log
+
+# Temp
+tmp/
+temp/
+
+# Only publish dist folder and essential files

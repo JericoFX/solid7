@@ -1,0 +1,63 @@
+{
+  "name": "solid-7css",
+  "version": "1.0.0",
+  "description": "SolidJS wrapper components for 7.css Windows 7 UI framework",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./css": "./dist/7.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc --emitDeclarationOnly",
+    "build:lib": "vite build --mode lib && tsc --emitDeclarationOnly",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/**/*.{ts,tsx}",
+    "prepublishOnly": "npm run build:lib",
+    "check-updates": "node scripts/check-updates.js",
+    "update-7css": "node scripts/check-updates.js --auto-update && npm install"
+  },
+  "keywords": [
+    "solidjs",
+    "7css",
+    "windows7",
+    "ui",
+    "components",
+    "css",
+    "framework"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/solid-7css.git"
+  },
+  "peerDependencies": {
+    "solid-js": "^1.8.0"
+  },
+  "dependencies": {
+    "7.css": "^0.17.0",
+    "clsx": "^2.1.1"
+  },
+  "devDependencies": {
+    "@solidjs/testing-library": "^0.8.5",
+    "@types/node": "^20.10.5",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "eslint": "^8.56.0",
+    "solid-js": "^1.8.11",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "vite-plugin-solid": "^2.8.2"
+  }
+}

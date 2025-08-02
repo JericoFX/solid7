@@ -50,6 +50,7 @@ export interface MenuItem {
   label: string;
   disabled?: boolean;
   divider?: boolean;
+  icon?: string; // URL or path to icon image
   onClick?: () => void;
   children?: MenuItem[];
 }

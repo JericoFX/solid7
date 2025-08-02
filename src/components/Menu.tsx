@@ -11,15 +11,25 @@ const MenuItemComponent: Component<{ item: MenuItem }> = (props) => {
       class={cn({ 'has-divider': props.item.divider })}
       aria-disabled={props.item.disabled}
       aria-haspopup={hasChildren()}
-      tabindex={props.item.disabled ? -1 : 0}
+      tabindex={props.item.divider ? -1 : (props.item.disabled ? -1 : 0)}
     >
-      <button 
-        type="button" 
-        disabled={props.item.disabled}
-        onClick={() => !props.item.disabled && props.item.onClick?.()}
-      >
-        {props.item.label}
-      </button>
+      <Show when={!props.item.divider}>
+        <Show when={props.item.icon}>
+          <img src={props.item.icon} alt="" width="18" height="18" />
+        </Show>
+        <Show when={!hasChildren()}>
+          <button 
+            type="button" 
+            disabled={props.item.disabled}
+            onClick={() => !props.item.disabled && props.item.onClick?.()}
+          >
+            {props.item.label}
+          </button>
+        </Show>
+        <Show when={hasChildren()}>
+          {props.item.label}
+        </Show>
+      </Show>
       <Show when={hasChildren()}>
         <ul role="menu">
           <For each={props.item.children}>

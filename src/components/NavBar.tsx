@@ -14,6 +14,7 @@ export interface NavBarProps {
 const NavBarItemComponent: Component<{ item: NavBarItem }> = (props) => {
   const [isOpen, setIsOpen] = createSignal(false);
   const hasChildren = () => props.item.children && props.item.children.length > 0;
+  let hoverTimeout: number;
   
   const handleClick = () => {
     if (!props.item.disabled) {
@@ -27,13 +28,32 @@ const NavBarItemComponent: Component<{ item: NavBarItem }> = (props) => {
 
   const handleMouseEnter = () => {
     if (hasChildren() && !props.item.disabled) {
+      clearTimeout(hoverTimeout);
       setIsOpen(true);
     }
   };
 
   const handleMouseLeave = () => {
     if (hasChildren()) {
-      setIsOpen(false);
+      clearTimeout(hoverTimeout);
+      hoverTimeout = setTimeout(() => {
+        setIsOpen(false);
+      }, 300); // 300ms delay before closing
+    }
+  };
+
+  const handleSubmenuMouseEnter = () => {
+    if (hasChildren()) {
+      clearTimeout(hoverTimeout);
+    }
+  };
+
+  const handleSubmenuMouseLeave = () => {
+    if (hasChildren()) {
+      clearTimeout(hoverTimeout);
+      hoverTimeout = setTimeout(() => {
+        setIsOpen(false);
+      }, 300);
     }
   };
 
@@ -50,7 +70,12 @@ const NavBarItemComponent: Component<{ item: NavBarItem }> = (props) => {
     >
       {props.item.label}
       <Show when={hasChildren() && isOpen()}>
-        <ul role="menu" class="can-hover">
+        <ul 
+          role="menu" 
+          class="can-hover"
+          onMouseEnter={handleSubmenuMouseEnter}
+          onMouseLeave={handleSubmenuMouseLeave}
+        >
           <For each={props.item.children}>
             {(childItem) => (
               <li 
@@ -62,6 +87,7 @@ const NavBarItemComponent: Component<{ item: NavBarItem }> = (props) => {
                 <button 
                   type="button" 
                   disabled={childItem.disabled}
+                  aria-haspopup={childItem.children && childItem.children.length > 0}
                   onClick={() => !childItem.disabled && childItem.onClick?.()}
                 >
                   {childItem.label}

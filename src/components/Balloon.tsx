@@ -26,6 +26,10 @@ export const Balloon: Component<BalloonProps> = (props) => {
         role="tooltip" 
         id={props.id}
         class={balloonClass()}
+        style={{
+          "max-width": "200px",
+          "word-wrap": "break-word"
+        }}
       >
         {props.content}
       </div>

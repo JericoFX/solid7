@@ -95,3 +95,16 @@ export interface SelectProps extends Omit<JSX.SelectHTMLAttributes<HTMLSelectEle
 export interface SearchBoxProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'type' | 'class'> {
   class?: string;
 }
+
+export interface ImageViewerProps {
+  class?: string;
+  width?: string;
+  height?: string;
+  title?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  onClose?: () => void;
+  onMinimize?: () => void;
+  onMaximize?: () => void;
+  showToolbar?: boolean;
+}

@@ -27,7 +27,7 @@ pnpm add solid-7css
 
 ```tsx
 import { Window, Button, ProgressBar } from 'solid-7css';
-import 'solid-7css/css'; // or import '7.css' directly
+// 7.css is automatically imported! No need to import CSS manually
 
 function App() {
   return (
@@ -38,6 +38,8 @@ function App() {
   );
 }
 ```
+
+> **Note**: The 7.css styles are automatically imported when you import any component from `solid-7css`. No need to manually import CSS files!
 
 ## Components
 

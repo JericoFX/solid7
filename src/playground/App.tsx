@@ -12,7 +12,7 @@ import {
   Radio,
   Select,
   SearchBox,
-  DialogBox,
+  DialogBox, 
   Balloon,
   ListView,
   TextBox,
@@ -20,8 +20,8 @@ import {
   TreeView,
   Dialog,
   Modal,
+  ImageViewer,
 } from '../components';
-import '7.css';
 import './App.css';
 
 const App: Component = () => {
@@ -393,6 +393,67 @@ const App: Component = () => {
               This context menu demonstrates the proper 7.css styling with
               dividers and disabled items.
             </p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 'viewer',
+      label: 'Image Viewer',
+      content: (
+        <div class='section'>
+          <h3>Image Viewer Component</h3>
+          <div class='component-group'>
+            <p style='margin-bottom: 16px;'>
+              Image viewer component with zoom controls and fit-to-window functionality.
+            </p>
+            
+            <div style='display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;'>
+              <ImageViewer 
+                title='Sample Image Viewer'
+                width='400px'
+                height='300px'
+                imageSrc='https://picsum.photos/800/600'
+                imageAlt='Random sample image'
+                onClose={() => alert('Close image viewer')}
+                onMinimize={() => alert('Minimize image viewer')}
+                onMaximize={() => alert('Maximize image viewer')}
+              />
+              
+              <ImageViewer 
+                title='No Image Example'
+                width='350px'
+                height='250px'
+                onClose={() => alert('Close empty viewer')}
+                showToolbar={true}
+              />
+            </div>
+            
+            <div style='margin-bottom: 20px;'>
+              <h4>Features:</h4>
+              <ul style='margin: 8px 0; padding-left: 20px;'>
+                <li>Zoom In/Out controls</li>
+                <li>Actual size (1:1) button</li>
+                <li>Fit to window functionality</li>
+                <li>Toolbar with zoom level indicator</li>
+                <li>Error handling for failed image loads</li>
+                <li>Placeholder when no image is provided</li>
+                <li>Proper 7.css window styling</li>
+              </ul>
+            </div>
+            
+            <div style='margin-bottom: 20px;'>
+              <ImageViewer 
+                title='Large Image Test'
+                width='500px'
+                height='400px'
+                imageSrc='https://picsum.photos/1920/1080'
+                imageAlt='Large sample image for testing zoom'
+                onClose={() => alert('Close large image viewer')}
+                onMinimize={() => alert('Minimize large image viewer')}
+                onMaximize={() => alert('Maximize large image viewer')}
+              />
+            </div>
           </div>
         </div>
       ),

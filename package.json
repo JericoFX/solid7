@@ -6,13 +6,15 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "style": "dist/7.css",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.esm.js",
       "require": "./dist/index.js"
     },
-    "./css": "./dist/7.css"
+    "./css": "./dist/7.css",
+    "./style.css": "./dist/7.css"
   },
   "files": [
     "dist"

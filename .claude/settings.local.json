@@ -11,7 +11,14 @@
       "Bash(git init:*)",
       "Bash(bun:*)",
       "Bash(del .eslintrc.js)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(npm run build:lib:*)",
+      "Bash(npx vite build:*)",
+      "Bash(npx tsc:*)",
+      "Bash(timeout:*)",
+      "Bash(find:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }

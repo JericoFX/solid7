@@ -6,6 +6,7 @@ A comprehensive SolidJS wrapper library for the [7.css](https://github.com/khang
 
 ## Features
 
+- ✅ **Zero Configuration** - Automatic CSS import, just install and use
 - ✅ **Complete 7.css Coverage** - All components wrapped with SolidJS
 - ✅ **TypeScript Support** - Full type definitions included  
 - ✅ **Reactive Props** - Seamless SolidJS integration
@@ -27,7 +28,7 @@ pnpm add solid-7css
 
 ```tsx
 import { Window, Button, ProgressBar } from 'solid-7css';
-// 7.css is automatically imported! No need to import CSS manually
+// ✨ 7.css is automatically imported! Zero configuration needed
 
 function App() {
   return (
@@ -39,7 +40,7 @@ function App() {
 }
 ```
 
-> **Note**: The 7.css styles are automatically imported when you import any component from `solid-7css`. No need to manually import CSS files!
+> **✨ Zero Configuration**: The 7.css styles are automatically imported when you import any component from `solid-7css`. No manual CSS imports or configuration required!
 
 ## Components
 

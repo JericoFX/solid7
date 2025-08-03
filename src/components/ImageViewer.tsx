@@ -124,7 +124,7 @@ export const ImageViewer: Component<ImageViewerProps> = (props) => {
     'border-bottom': '1px solid #cfcfcf',
     'background': '#f0f0f0',
     'flex-shrink': '0',
-    'flex-wrap': 'nowrap',
+    'flex-wrap': 'nowrap' as const,
     'overflow': 'hidden'
   });
 

@@ -23,7 +23,8 @@
       "Bash(npm run dev:*)",
       "WebFetch(domain:127.0.0.1)",
       "Bash(curl:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": []
   }

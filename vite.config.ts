@@ -1,33 +1,13 @@
 import { defineConfig } from 'vite';
 import solid from 'vite-plugin-solid';
 import { resolve } from 'path';
-import { copyFileSync, mkdirSync } from 'fs';
 
 export default defineConfig(({ mode }) => {
   const isLib = mode === 'lib';
   
   return {
     plugins: [
-      solid(),
-      // Plugin to copy 7.css to dist folder
-      {
-        name: 'copy-7css',
-        apply: 'build',
-        generateBundle() {
-          if (isLib) {
-            try {
-              // Copy 7.css from node_modules to dist
-              const source = resolve(__dirname, 'node_modules/7.css/dist/7.css');
-              const dest = resolve(__dirname, 'dist/7.css');
-              mkdirSync(resolve(__dirname, 'dist'), { recursive: true });
-              copyFileSync(source, dest);
-              console.log('✓ Copied 7.css to dist folder');
-            } catch (error) {
-              console.warn('Warning: Could not copy 7.css:', error.message);
-            }
-          }
-        }
-      }
+      solid()
     ],
     build: isLib ? {
       lib: {

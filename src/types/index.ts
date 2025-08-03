@@ -101,10 +101,11 @@ export interface ImageViewerProps {
   width?: string;
   height?: string;
   title?: string;
-  imageSrc?: string;
-  imageAlt?: string;
+  imageSrc?: string | string[];
+  imageAlt?: string | string[];
   onClose?: () => void;
   onMinimize?: () => void;
   onMaximize?: () => void;
   showToolbar?: boolean;
+  isModal?: boolean;
 }

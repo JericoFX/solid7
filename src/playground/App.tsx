@@ -33,6 +33,7 @@ const App: Component = () => {
   const [showDialog, setShowDialog] = createSignal(false);
   const [showModal, setShowModal] = createSignal(false);
   const [showBalloon, setShowBalloon] = createSignal(false);
+  const [showImageModal, setShowImageModal] = createSignal(false);
   const [selectedListItem, setSelectedListItem] = createSignal('item1');
   const [textBoxValue, setTextBoxValue] = createSignal('');
   const [textAreaValue, setTextAreaValue] = createSignal('');
@@ -405,21 +406,48 @@ const App: Component = () => {
           <h3>Image Viewer Component</h3>
           <div class='component-group'>
             <p style='margin-bottom: 16px;'>
-              Image viewer component with zoom controls and fit-to-window functionality.
+              Enhanced image viewer component with zoom controls, carousel functionality, and modal support.
             </p>
+            
+            <div style='display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;'>
+              <Button onClick={() => setShowImageModal(true)}>
+                Open Modal Carousel
+              </Button>
+            </div>
             
             <div style='display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;'>
               <ImageViewer 
-                title='Sample Image Viewer'
+                title='Single Image Viewer'
                 width='400px'
                 height='300px'
-                imageSrc='https://picsum.photos/800/600'
+                imageSrc='https://picsum.photos/800/600?random=1'
                 imageAlt='Random sample image'
                 onClose={() => alert('Close image viewer')}
                 onMinimize={() => alert('Minimize image viewer')}
                 onMaximize={() => alert('Maximize image viewer')}
               />
               
+              <ImageViewer 
+                title='Multiple Images Carousel'
+                width='640px'
+                height='300px'
+                imageSrc={[
+                  'https://picsum.photos/800/600?random=2',
+                  'https://picsum.photos/800/600?random=3',
+                  'https://picsum.photos/800/600?random=4'
+                ]}
+                imageAlt={[
+                  'Random sample image 1',
+                  'Random sample image 2', 
+                  'Random sample image 3'
+                ]}
+                onClose={() => alert('Close carousel viewer')}
+                onMinimize={() => alert('Minimize carousel viewer')}
+                onMaximize={() => alert('Maximize carousel viewer')}
+              />
+            </div>
+            
+            <div style='display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;'>
               <ImageViewer 
                 title='No Image Example'
                 width='350px'
@@ -432,27 +460,34 @@ const App: Component = () => {
             <div style='margin-bottom: 20px;'>
               <h4>Features:</h4>
               <ul style='margin: 8px 0; padding-left: 20px;'>
-                <li>Zoom In/Out controls</li>
-                <li>Actual size (1:1) button</li>
-                <li>Fit to window functionality</li>
-                <li>Toolbar with zoom level indicator</li>
-                <li>Error handling for failed image loads</li>
-                <li>Placeholder when no image is provided</li>
-                <li>Proper 7.css window styling</li>
+                <li>🔍 Zoom In/Out controls</li>
+                <li>📐 Actual size (1:1) button</li>
+                <li>🖼️ Fit to window functionality</li>
+                <li>🎛️ Toolbar with zoom level indicator</li>
+                <li>🚨 Error handling for failed image loads</li>
+                <li>📋 Placeholder when no image is provided</li>
+                <li>🎨 Proper 7.css window styling</li>
+                <li>🎠 <strong>NEW:</strong> Carousel for multiple images</li>
+                <li>🪟 <strong>NEW:</strong> Modal overlay support</li>
+                <li>⌨️ <strong>NEW:</strong> Keyboard navigation (arrows, ESC)</li>
+                <li>🔢 <strong>NEW:</strong> Image counter display</li>
               </ul>
             </div>
             
             <div style='margin-bottom: 20px;'>
-              <ImageViewer 
-                title='Large Image Test'
-                width='500px'
-                height='400px'
-                imageSrc='https://picsum.photos/1920/1080'
-                imageAlt='Large sample image for testing zoom'
-                onClose={() => alert('Close large image viewer')}
-                onMinimize={() => alert('Minimize large image viewer')}
-                onMaximize={() => alert('Maximize large image viewer')}
-              />
+              <h4>Usage Examples:</h4>
+              <pre style='background: #f5f5f5; padding: 10px; border-radius: 4px; font-size: 12px; overflow-x: auto;'>{`// Single image
+<ImageViewer imageSrc="image.jpg" />
+
+// Multiple images (carousel)
+<ImageViewer imageSrc={["img1.jpg", "img2.jpg", "img3.jpg"]} />
+
+// Modal overlay
+<ImageViewer
+  isModal={true}
+  imageSrc={["img1.jpg", "img2.jpg"]}
+  onClose={() => setShowModal(false)}
+/>`}</pre>
             </div>
           </div>
         </div>
@@ -721,6 +756,30 @@ const App: Component = () => {
       >
         <p>This is a simple dialog component.</p>
       </Dialog>
+
+      {showImageModal() && (
+        <ImageViewer
+          title='Modal Image Carousel'
+          isModal={true}
+          imageSrc={[
+            'https://picsum.photos/1200/800?random=10',
+            'https://picsum.photos/1200/800?random=11',
+            'https://picsum.photos/1200/800?random=12',
+            'https://picsum.photos/1200/800?random=13',
+            'https://picsum.photos/1200/800?random=14'
+          ]}
+          imageAlt={[
+            'Modal sample image 1',
+            'Modal sample image 2',
+            'Modal sample image 3',
+            'Modal sample image 4',
+            'Modal sample image 5'
+          ]}
+          width='80vw'
+          height='80vh'
+          onClose={() => setShowImageModal(false)}
+        />
+      )}
     </div>
   );
 };

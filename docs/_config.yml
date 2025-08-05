@@ -1,8 +1,8 @@
 title: Solid 7.CSS
 description: SolidJS Components for Windows 7 UI
 theme: minima
-baseurl: "/solid7"
-url: "https://your-username.github.io"
+baseurl: '/solid7'
+url: 'https://JericoFX.github.io'
 
 markdown: kramdown
 highlighter: rouge
@@ -20,7 +20,7 @@ navigation:
     url: /
   - title: Components
     url: /COMPONENTS
-  - title: Examples  
+  - title: Examples
     url: /EXAMPLES
   - title: GitHub
-    url: https://github.com/your-username/solid7
+    url: https://github.com/JericoFX/solid7

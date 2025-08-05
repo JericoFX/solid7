@@ -6,7 +6,9 @@ export default defineConfig(({ mode }) => {
   const isLib = mode === 'lib';
   
   return {
-    plugins: [solid()],
+    plugins: [
+      solid()
+    ],
     build: isLib ? {
       lib: {
         entry: resolve(__dirname, 'src/index.ts'),
@@ -15,10 +17,11 @@ export default defineConfig(({ mode }) => {
         fileName: (format) => `index.${format === 'es' ? 'esm' : format}.js`
       },
       rollupOptions: {
-        external: ['solid-js'],
+        external: ['solid-js', '7.css'],
         output: {
           globals: {
-            'solid-js': 'SolidJS'
+            'solid-js': 'SolidJS',
+            '7.css': '7CSS'
           }
         }
       },

@@ -1,5 +1,6 @@
 {
   "name": "solid-7css",
+  "type": "module",
   "version": "1.0.0",
   "description": "SolidJS wrapper components for 7.css Windows 7 UI framework",
   "main": "dist/index.js",
@@ -7,25 +8,24 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.esm.js",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./css": "./dist/7.css"
+      "require": "./dist/index.js"
+    }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && tsc --emitDeclarationOnly",
-    "build:lib": "vite build --mode lib && tsc --emitDeclarationOnly",
-    "preview": "vite preview",
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint src/**/*.{ts,tsx}",
-    "prepublishOnly": "npm run build:lib",
-    "check-updates": "node scripts/check-updates.js",
-    "update-7css": "node scripts/check-updates.js --auto-update && npm install"
+    "dev": "bunx --bun vite",
+    "build": "bunx --bun vite build && bunx tsc --emitDeclarationOnly",
+    "build:lib": "bunx --bun vite build --mode lib && bunx tsc --emitDeclarationOnly",
+    "preview": "bunx --bun vite preview",
+    "typecheck": "bunx tsc --noEmit",
+    "lint": "bunx eslint src/**/*.{ts,tsx}",
+    "prepublishOnly": "bun run build:lib",
+    "check-updates": "bun scripts/check-updates.js",
+    "update-7css": "bun scripts/check-updates.js --auto-update && bun install"
   },
   "keywords": [
     "solidjs",
@@ -36,28 +36,30 @@
     "css",
     "framework"
   ],
-  "author": "Your Name",
+  "author": "JericoFX",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/solid-7css.git"
+    "url": "https://github.com/jericofx/solid-7css.git"
   },
   "peerDependencies": {
     "solid-js": "^1.8.0"
   },
   "dependencies": {
-    "7.css": "^0.17.0",
+    "7.css": "^0.21.1",
     "clsx": "^2.1.1"
   },
   "devDependencies": {
-    "@solidjs/testing-library": "^0.8.5",
-    "@types/node": "^20.10.5",
-    "@typescript-eslint/eslint-plugin": "^6.17.0",
-    "@typescript-eslint/parser": "^6.17.0",
-    "eslint": "^8.56.0",
-    "solid-js": "^1.8.11",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.10",
-    "vite-plugin-solid": "^2.8.2"
+    "@solidjs/testing-library": "^0.8.10",
+    "@types/node": "^24.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "eslint": "^9.32.0",
+    "globals": "^16.3.0",
+    "playwright": "^1.54.2",
+    "solid-js": "^1.9.7",
+    "typescript": "^5.9.2",
+    "vite": "^7.0.6",
+    "vite-plugin-solid": "^2.11.8"
   }
 }

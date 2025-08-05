@@ -2,8 +2,11 @@
 
 A comprehensive SolidJS wrapper library for the [7.css](https://github.com/khang-nd/7.css) Windows 7 UI framework. Built with full TypeScript support and reactive SolidJS patterns.
 
+🚀 **[Live Demo & Documentation](https://your-username.github.io/solid7/)**
+
 ## Features
 
+- ✅ **Zero Configuration** - Automatic CSS import, just install and use
 - ✅ **Complete 7.css Coverage** - All components wrapped with SolidJS
 - ✅ **TypeScript Support** - Full type definitions included  
 - ✅ **Reactive Props** - Seamless SolidJS integration
@@ -25,7 +28,7 @@ pnpm add solid-7css
 
 ```tsx
 import { Window, Button, ProgressBar } from 'solid-7css';
-import 'solid-7css/css'; // or import '7.css' directly
+// ✨ 7.css is automatically imported! Zero configuration needed
 
 function App() {
   return (
@@ -36,6 +39,8 @@ function App() {
   );
 }
 ```
+
+> **✨ Zero Configuration**: The 7.css styles are automatically imported when you import any component from `solid-7css`. No manual CSS imports or configuration required!
 
 ## Components
 

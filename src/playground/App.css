@@ -91,6 +91,28 @@ body {
   margin-bottom: 5px;
 }
 
+/* Navbar hover behavior fixes */
+ul.can-hover [role=menuitem]:hover>[role=menu],
+ul.can-hover [role=menuitem]>[role=menu]:hover {
+  display: block !important;
+}
+
+/* Extend hover area to include dropdown menu */
+ul.can-hover [role=menuitem]:hover>[role=menu]:hover,
+ul.can-hover [role=menuitem]:focus-within>[role=menu] {
+  display: block !important;
+}
+
+/* Add small transition delay for smoother UX */
+ul.can-hover [role=menu] {
+  transition: opacity 0.1s ease;
+}
+
+/* Keep dropdown visible when hovering over it */
+ul.can-hover [role=menuitem] [role=menu]:hover {
+  display: block !important;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .app {

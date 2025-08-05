@@ -1,4 +1,4 @@
-import { Component, For, Show, createSignal } from 'solid-js';
+import { Component, For, Show } from 'solid-js';
 import { cn } from '../utils/cn';
 import { MenuItem } from '../types';
 
@@ -12,28 +12,11 @@ export interface NavBarProps {
 }
 
 const NavBarItemComponent: Component<{ item: NavBarItem }> = (props) => {
-  const [isOpen, setIsOpen] = createSignal(false);
   const hasChildren = () => props.item.children && props.item.children.length > 0;
   
   const handleClick = () => {
-    if (!props.item.disabled) {
-      if (hasChildren()) {
-        setIsOpen(!isOpen());
-      } else {
-        props.item.onClick?.();
-      }
-    }
-  };
-
-  const handleMouseEnter = () => {
-    if (hasChildren() && !props.item.disabled) {
-      setIsOpen(true);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (hasChildren()) {
-      setIsOpen(false);
+    if (!props.item.disabled && !hasChildren()) {
+      props.item.onClick?.();
     }
   };
 
@@ -44,28 +27,39 @@ const NavBarItemComponent: Component<{ item: NavBarItem }> = (props) => {
       aria-disabled={props.item.disabled}
       aria-haspopup={hasChildren()}
       onClick={handleClick}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      class={cn({ 'has-children': hasChildren() })}
     >
+      <Show when={props.item.icon}>
+        <img src={props.item.icon} alt="" width="18" height="18" />
+      </Show>
       {props.item.label}
-      <Show when={hasChildren() && isOpen()}>
-        <ul role="menu" class="can-hover">
+      <Show when={hasChildren()}>
+        <ul role="menu">
           <For each={props.item.children}>
             {(childItem) => (
               <li 
                 role="menuitem" 
                 class={cn({ 'has-divider': childItem.divider })}
                 aria-disabled={childItem.disabled}
-                tabindex={childItem.disabled ? -1 : 0}
+                tabindex={childItem.divider ? -1 : (childItem.disabled ? -1 : 0)}
+                aria-haspopup={childItem.children && childItem.children.length > 0}
               >
-                <button 
-                  type="button" 
-                  disabled={childItem.disabled}
-                  onClick={() => !childItem.disabled && childItem.onClick?.()}
-                >
-                  {childItem.label}
-                </button>
+                <Show when={!childItem.divider}>
+                  <Show when={childItem.icon}>
+                    <img src={childItem.icon} alt="" width="18" height="18" />
+                  </Show>
+                  <Show when={!(childItem.children && childItem.children.length > 0)}>
+                    <button 
+                      type="button" 
+                      disabled={childItem.disabled}
+                      onClick={() => !childItem.disabled && childItem.onClick?.()}
+                    >
+                      {childItem.label}
+                    </button>
+                  </Show>
+                  <Show when={childItem.children && childItem.children.length > 0}>
+                    {childItem.label}
+                  </Show>
+                </Show>
                 <Show when={childItem.children && childItem.children.length > 0}>
                   <ul role="menu">
                     <For each={childItem.children}>
@@ -74,15 +68,20 @@ const NavBarItemComponent: Component<{ item: NavBarItem }> = (props) => {
                           role="menuitem" 
                           class={cn({ 'has-divider': grandchildItem.divider })}
                           aria-disabled={grandchildItem.disabled}
-                          tabindex={grandchildItem.disabled ? -1 : 0}
+                          tabindex={grandchildItem.divider ? -1 : (grandchildItem.disabled ? -1 : 0)}
                         >
-                          <button 
-                            type="button" 
-                            disabled={grandchildItem.disabled}
-                            onClick={() => !grandchildItem.disabled && grandchildItem.onClick?.()}
-                          >
-                            {grandchildItem.label}
-                          </button>
+                          <Show when={!grandchildItem.divider}>
+                            <Show when={grandchildItem.icon}>
+                              <img src={grandchildItem.icon} alt="" width="18" height="18" />
+                            </Show>
+                            <button 
+                              type="button" 
+                              disabled={grandchildItem.disabled}
+                              onClick={() => !grandchildItem.disabled && grandchildItem.onClick?.()}
+                            >
+                              {grandchildItem.label}
+                            </button>
+                          </Show>
                         </li>
                       )}
                     </For>

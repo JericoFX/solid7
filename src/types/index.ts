@@ -50,6 +50,7 @@ export interface MenuItem {
   label: string;
   disabled?: boolean;
   divider?: boolean;
+  icon?: string; // URL or path to icon image
   onClick?: () => void;
   children?: MenuItem[];
 }
@@ -93,4 +94,18 @@ export interface SelectProps extends Omit<JSX.SelectHTMLAttributes<HTMLSelectEle
 
 export interface SearchBoxProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'type' | 'class'> {
   class?: string;
+}
+
+export interface ImageViewerProps {
+  class?: string;
+  width?: string;
+  height?: string;
+  title?: string;
+  imageSrc?: string | string[];
+  imageAlt?: string | string[];
+  onClose?: () => void;
+  onMinimize?: () => void;
+  onMaximize?: () => void;
+  showToolbar?: boolean;
+  isModal?: boolean;
 }

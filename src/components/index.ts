@@ -19,3 +19,4 @@ export { TreeView } from './TreeView';
 export { Dialog } from './Dialog';
 export { DialogBox } from './DialogBox';
 export { Modal } from './Modal';
+export { ImageViewer } from './ImageViewer';

@@ -56,7 +56,12 @@ jspm_packages/
 tmp/
 temp/
 
-# Claude AI files
-.claude/
-CLAUDE.md
-CLAUDE.local.md
+
+# Jekyll and Ruby Gem files
+Gemfile
+Gemfile.lock
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+vendor/

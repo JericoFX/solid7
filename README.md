@@ -2,7 +2,7 @@
 
 A comprehensive SolidJS wrapper library for the [7.css](https://github.com/khang-nd/7.css) Windows 7 UI framework. Built with full TypeScript support and reactive SolidJS patterns.
 
-🚀 **[Live Demo & Documentation](https://your-username.github.io/solid7/)**
+🚀 **[Live Demo & Documentation](https://JericoFX.github.io/solid7/)**
 
 ## Features
 

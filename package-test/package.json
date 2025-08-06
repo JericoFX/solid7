@@ -1,0 +1,19 @@
+{
+  "name": "package-test",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bunx --bun vite",
+    "build": "bunx --bun vite build",
+    "typecheck": "bunx tsc --noEmit"
+  },
+  "dependencies": {
+    "solid-7css": "../solid-7css-1.0.0.tgz",
+    "solid-js": "^1.9.7"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "vite": "^7.0.6",
+    "vite-plugin-solid": "^2.11.8"
+  }
+}

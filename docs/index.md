@@ -216,7 +216,7 @@ const App: Component = () => {
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/solid7.git
+git clone https://github.com/JericoFX/solid7.git
 cd solid7
 
 # Install dependencies
@@ -242,8 +242,9 @@ npm run lint
 ## 📖 Documentation
 
 - **[Component Reference](components)** - Detailed API documentation
+- **[Live Demo](demo)** - Interactive component showcase
 - **[Examples](examples)** - Code examples and patterns
-- **[GitHub Repository](https://github.com/your-username/solid7)** - Source code
+- **[GitHub Repository](https://github.com/JericoFX/solid7)** - Source code
 
 ## 🤝 Contributing
 
@@ -257,7 +258,7 @@ Contributions are welcome! Please:
 
 ## 📄 License
 
-MIT License - see [LICENSE](https://github.com/your-username/solid7/blob/main/LICENSE) file for details.
+MIT License - see [LICENSE](https://github.com/JericoFX/solid7/blob/main/LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
@@ -269,7 +270,8 @@ MIT License - see [LICENSE](https://github.com/your-username/solid7/blob/main/LI
 
 <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f0f0f0; border: 1px solid #ccc;">
   <strong>🚀 Ready to build nostalgic interfaces?</strong><br>
-  <a href="https://github.com/your-username/solid7" style="margin: 0 10px;">Download</a> |
+  <a href="https://github.com/JericoFX/solid7" style="margin: 0 10px;">Download</a> |
+  <a href="demo" style="margin: 0 10px;">Live Demo</a> |
   <a href="components" style="margin: 0 10px;">View Components</a> |
   <a href="examples" style="margin: 0 10px;">See Examples</a>
 </div>

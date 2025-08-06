@@ -40,7 +40,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jericofx/solid-7css.git"
+    "url": "https://github.com/JericoFX/solid7.git"
   },
   "peerDependencies": {
     "solid-js": "^1.8.0"

@@ -8,7 +8,7 @@ A comprehensive SolidJS wrapper library for the [7.css](https://github.com/khang
 
 - ✅ **Zero Configuration** - Automatic CSS import, just install and use
 - ✅ **Complete 7.css Coverage** - All components wrapped with SolidJS
-- ✅ **TypeScript Support** - Full type definitions included  
+- ✅ **TypeScript Support** - Full type definitions included
 - ✅ **Reactive Props** - Seamless SolidJS integration
 - ✅ **Accessibility** - ARIA attributes and semantic HTML
 - ✅ **Tree Shaking** - Import only what you need
@@ -32,8 +32,8 @@ import { Window, Button, ProgressBar } from 'solid-7css';
 
 function App() {
   return (
-    <Window title="My App" width="400px" active>
-      <Button variant="default">Click me!</Button>
+    <Window title='My App' width='400px' active>
+      <Button variant='default'>Click me!</Button>
       <ProgressBar value={75} />
     </Window>
   );
@@ -45,10 +45,11 @@ function App() {
 ## Components
 
 ### Window
+
 ```tsx
-<Window 
-  title="Window Title"
-  width="500px"
+<Window
+  title='Window Title'
+  width='500px'
   active
   glass
   onClose={() => console.log('Closed!')}
@@ -58,6 +59,7 @@ function App() {
 ```
 
 ### Buttons
+
 ```tsx
 <Button>Normal Button</Button>
 <Button variant="default">Default Button</Button>
@@ -65,6 +67,7 @@ function App() {
 ```
 
 ### Form Controls
+
 ```tsx
 <Checkbox label="Check me" checked={checked()} onChange={setChecked} />
 <Radio name="group" value="1" label="Option 1" />
@@ -77,6 +80,7 @@ function App() {
 ```
 
 ### Progress & Status
+
 ```tsx
 <ProgressBar value={progress()} animate />
 <StatusBar fields={[
@@ -86,6 +90,7 @@ function App() {
 ```
 
 ### Navigation
+
 ```tsx
 <Tabs tabs={[
   { id: 'tab1', label: 'Tab 1', content: <div>Content 1</div> },
@@ -130,7 +135,7 @@ The playground showcases every component with interactive examples and demonstra
 ## Built With
 
 - [SolidJS](https://solidjs.com) - Reactive UI library
-- [7.css](https://github.com/khang-nd/7.css) - Windows 7 CSS framework  
+- [7.css](https://github.com/khang-nd/7.css) - Windows 7 CSS framework
 - [TypeScript](https://typescriptlang.org) - Type safety
 - [Vite](https://vitejs.dev) - Build tool
 
@@ -143,5 +148,3 @@ MIT License - see [LICENSE](LICENSE) file for details.
 Contributions welcome! Please read our contributing guidelines and submit pull requests to our repository.
 
 ---
-
-Made with ❤️ using Context7 MCP for documentation generation

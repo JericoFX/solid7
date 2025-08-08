@@ -6,6 +6,7 @@ export default defineConfig(({ mode }) => {
   const isLib = mode === 'lib';
   
   return {
+    base: isLib ? '/' : '/solid7/',
     plugins: [
       solid()
     ],

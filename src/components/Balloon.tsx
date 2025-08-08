@@ -27,8 +27,8 @@ export const Balloon: Component<BalloonProps> = (props) => {
         id={props.id}
         class={balloonClass()}
         style={{
-          "max-width": "200px",
-          "word-wrap": "break-word"
+          "min-width": "max-content",
+          "white-space": "nowrap"
         }}
       >
         {props.content}

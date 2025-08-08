@@ -56,6 +56,7 @@
     "@typescript-eslint/parser": "^8.38.0",
     "eslint": "^9.32.0",
     "globals": "^16.3.0",
+    "playwright": "^1.54.2",
     "solid-js": "^1.9.7",
     "typescript": "^5.9.2",
     "vite": "^7.0.6",

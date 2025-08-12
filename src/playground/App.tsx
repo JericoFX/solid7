@@ -21,6 +21,8 @@ import {
   Dialog,
   Modal,
   ImageViewer,
+  FileExplorer,
+  WindowedFileExplorer,
 } from '../components';
 import './App.css';
 
@@ -39,6 +41,67 @@ const App: Component = () => {
   const [textAreaValue, setTextAreaValue] = createSignal('');
   const [sortColumn, setSortColumn] = createSignal<string>('');
   const [sortDirection, setSortDirection] = createSignal<'asc' | 'desc'>('asc');
+  
+  // File Explorer navigation state
+  const [explorerPath, setExplorerPath] = createSignal('');
+  const [explorerData, setExplorerData] = createSignal([
+    { name: 'Documents', type: 'folder' as const, modified: new Date('2023-12-01') },
+    { name: 'Pictures', type: 'folder' as const, modified: new Date('2023-11-28') },
+    { name: 'Music', type: 'folder' as const, modified: new Date('2023-11-25') },
+    { name: 'Videos', type: 'folder' as const, modified: new Date('2023-11-20') },
+    { name: 'Desktop', type: 'folder' as const, modified: new Date('2023-12-05') },
+    { name: 'Downloads', type: 'folder' as const, modified: new Date('2023-12-03') },
+    { name: 'readme.txt', type: 'file' as const, size: 2048, modified: new Date('2023-10-15') },
+    { name: 'config.ini', type: 'file' as const, size: 512, modified: new Date('2023-11-01') },
+    { name: 'photo.jpg', type: 'file' as const, size: 1048576, modified: new Date('2023-11-30') },
+    { name: 'document.pdf', type: 'file' as const, size: 524288, modified: new Date('2023-12-02') }
+  ]);
+
+  // Simulated file system for navigation
+  const fileSystem: Record<string, any[]> = {
+    '': [ // Root / Computer
+      { name: 'Documents', type: 'folder', modified: new Date('2023-12-01') },
+      { name: 'Pictures', type: 'folder', modified: new Date('2023-11-28') },
+      { name: 'Music', type: 'folder', modified: new Date('2023-11-25') },
+      { name: 'Videos', type: 'folder', modified: new Date('2023-11-20') },
+      { name: 'Desktop', type: 'folder', modified: new Date('2023-12-05') },
+      { name: 'Downloads', type: 'folder', modified: new Date('2023-12-03') },
+      { name: 'readme.txt', type: 'file', size: 2048, modified: new Date('2023-10-15') },
+      { name: 'config.ini', type: 'file', size: 512, modified: new Date('2023-11-01') },
+      { name: 'photo.jpg', type: 'file', size: 1048576, modified: new Date('2023-11-30') },
+      { name: 'document.pdf', type: 'file', size: 524288, modified: new Date('2023-12-02') }
+    ],
+    'Documents': [
+      { name: 'Work', type: 'folder', modified: new Date('2023-11-15') },
+      { name: 'Personal', type: 'folder', modified: new Date('2023-11-10') },
+      { name: 'letter.docx', type: 'file', size: 15360, modified: new Date('2023-11-20') },
+      { name: 'resume.pdf', type: 'file', size: 87432, modified: new Date('2023-10-05') }
+    ],
+    'Documents\\Work': [
+      { name: 'Projects', type: 'folder', modified: new Date('2023-11-12') },
+      { name: 'Reports', type: 'folder', modified: new Date('2023-11-08') },
+      { name: 'presentation.pptx', type: 'file', size: 3456789, modified: new Date('2023-11-14') },
+      { name: 'budget.xlsx', type: 'file', size: 123456, modified: new Date('2023-11-01') }
+    ],
+    'Pictures': [
+      { name: 'Vacation 2023', type: 'folder', modified: new Date('2023-08-15') },
+      { name: 'Family', type: 'folder', modified: new Date('2023-09-20') },
+      { name: 'sunset.jpg', type: 'file', size: 1024000, modified: new Date('2023-07-12') },
+      { name: 'beach.png', type: 'file', size: 2048000, modified: new Date('2023-07-15') }
+    ],
+    'Music': [
+      { name: 'Rock', type: 'folder', modified: new Date('2023-05-10') },
+      { name: 'Jazz', type: 'folder', modified: new Date('2023-06-05') },
+      { name: 'favorite_song.mp3', type: 'file', size: 5242880, modified: new Date('2023-06-20') }
+    ]
+  };
+
+  const handleFileExplorerNavigation = (path: string) => {
+    setExplorerPath(path);
+    const data = fileSystem[path] || [];
+    setExplorerData(data);
+    console.log(`Navigated to: "${path}" - ${data.length} items`);
+  };
 
   const tabs = [
     {
@@ -488,6 +551,227 @@ const App: Component = () => {
   imageSrc={["img1.jpg", "img2.jpg"]}
   onClose={() => setShowModal(false)}
 />`}</pre>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 'explorer',
+      label: 'File Explorer',
+      content: (
+        <div class='section'>
+          <h3>Windows 7 File Explorer</h3>
+          <div class='component-group'>
+            <p style='margin-bottom: 16px;'>
+              File Explorer component with Windows 7 styling, supporting both icons and details view.
+            </p>
+            
+            <div style='margin-bottom: 20px;'>
+              <div style='background: #f0f0f0; padding: 10px; border-radius: 4px; margin-bottom: 10px; font-size: 12px;'>
+                <strong>Current Path:</strong> {explorerPath() || 'Computer (Root)'}
+              </div>
+              
+              <h4>Windowed File Explorer - Icons View</h4>
+              <Window
+                title={`${explorerPath() || 'Computer'} - Windows Explorer`}
+                width="700px"
+                height="500px"
+                active={true}
+                hasSpace={false}
+                onClose={() => alert('File Explorer closed')}
+                onMinimize={() => alert('File Explorer minimized')}
+                onMaximize={() => alert('File Explorer maximized')}
+              >
+                <FileExplorer
+                  data={explorerData()}
+                  currentPath={explorerPath()}
+                  viewMode="icons"
+                  showSearch={true}
+                  searchPlaceholder="Search files and folders..."
+                  width="100%"
+                  height="100%"
+                  onNavigate={(path, item) => {
+                    handleFileExplorerNavigation(path);
+                    console.log('Navigate to:', path, item);
+                  }}
+                  onFileSelect={(item, selected) => {
+                    console.log('Selected:', item.name, 'Total:', selected.length);
+                  }}
+                  onFileOpen={(item) => {
+                    console.log('Open:', item);
+                    alert(`Opening: ${item.name} (${item.type})`);
+                  }}
+                  onSearchChange={(term, filtered) => {
+                    console.log('Search:', term, 'Results:', filtered.length);
+                  }}
+                />
+              </Window>
+            </div>
+            
+            <div style='margin-bottom: 20px;'>
+              <h4>Windowed Details View (System Files Example)</h4>
+              <Window
+                title="C:\ - Windows Explorer"
+                width="800px"
+                height="450px"
+                active={true}
+                hasSpace={false}
+                onClose={() => alert('System Explorer closed')}
+                onMinimize={() => alert('System Explorer minimized')}
+                onMaximize={() => alert('System Explorer maximized')}
+              >
+                <FileExplorer
+                  data={[
+                    { name: 'System32', type: 'folder', modified: new Date('2023-10-01') },
+                    { name: 'Program Files', type: 'folder', modified: new Date('2023-09-15') },
+                    { name: 'Program Files (x86)', type: 'folder', modified: new Date('2023-09-15') },
+                    { name: 'Users', type: 'folder', modified: new Date('2023-11-20') },
+                    { name: 'Windows', type: 'folder', modified: new Date('2023-10-01') },
+                    { name: 'autoexec.bat', type: 'file', size: 128, modified: new Date('2023-08-01') },
+                    { name: 'config.sys', type: 'file', size: 256, modified: new Date('2023-08-01') },
+                    { name: 'pagefile.sys', type: 'file', size: 4294967296, modified: new Date('2023-12-05') },
+                    { name: 'hiberfil.sys', type: 'file', size: 2147483648, modified: new Date('2023-12-04') }
+                  ]}
+                  currentPath="C:"
+                  viewMode="details"
+                  showSearch={true}
+                  searchPlaceholder="Search system files..."
+                  width="100%"
+                  height="100%"
+                  onNavigate={(path, item) => {
+                    console.log('Navigate to:', path, item);
+                    alert(`Would navigate to: ${path} (${item.name})`);
+                  }}
+                  onFileSelect={(item, selected) => {
+                    console.log('Selected:', item.name, 'Total:', selected.length);
+                  }}
+                  onFileOpen={(item) => {
+                    console.log('Open:', item);
+                    alert(`Opening: ${item.name} (${item.type})`);
+                  }}
+                  onSearchChange={(term, filtered) => {
+                    console.log('Search:', term, 'Results:', filtered.length);
+                  }}
+                />
+              </Window>
+            </div>
+            
+            <div style='margin-bottom: 20px;'>
+              <h4>Features:</h4>
+              <ul style='margin: 8px 0; padding-left: 20px;'>
+                <li>📁 Icons view and Details view modes</li>
+                <li>🔍 Integrated search functionality with live filtering</li>
+                <li>🏷️ Interactive breadcrumb navigation (click any path segment)</li>
+                <li>🔄 <strong>NEW:</strong> Functional Back, Forward, and Up navigation buttons</li>
+                <li>🧭 <strong>NEW:</strong> Navigation history with browser-like behavior</li>
+                <li>📊 Status bar with item counts and search status</li>
+                <li>🎯 Click to select, double-click to navigate/open</li>
+                <li>⌨️ Multi-select with Ctrl+Click</li>
+                <li>📝 Sortable columns in details view (click headers)</li>
+                <li>🎨 Authentic Windows 7 styling and gradients</li>
+                <li>📏 Custom scrollbars matching Windows 7 design</li>
+                <li>🗂️ File and folder icons with proper types</li>
+                <li>📋 Smart file size formatting (B, KB, MB, GB)</li>
+                <li>📅 Date and time formatting</li>
+                <li>🚫 Disabled navigation buttons when not applicable</li>
+                <li>🏠 "Computer" root navigation</li>
+                <li>🪟 <strong>NEW:</strong> WindowedFileExplorer component (FileExplorer + Window)</li>
+                <li>📱 <strong>NEW:</strong> Dynamic window titles that update with navigation</li>
+                <li>🎛️ <strong>NEW:</strong> Full window controls (minimize, maximize, close)</li>
+              </ul>
+            </div>
+            
+            <div style='margin-bottom: 20px;'>
+              <h4>Usage Examples:</h4>
+              <pre style='background: #f5f5f5; padding: 10px; border-radius: 4px; font-size: 12px; overflow-x: auto;'>{`// Basic usage with navigation
+const [currentPath, setCurrentPath] = createSignal('');
+const [fileData, setFileData] = createSignal([]);
+
+// Update data when path changes
+const handleNavigation = (path: string, item: FileItem) => {
+  setCurrentPath(path);
+  const newData = getDataForPath(path); // Your data source
+  setFileData(newData);
+};
+
+<FileExplorer 
+  data={fileData()} 
+  currentPath={currentPath()}
+  viewMode="icons"
+  showSearch={true}
+  onNavigate={handleNavigation}
+  onFileOpen={(item) => openFile(item)}
+  onFileSelect={(item, selected) => updateSelection(selected)}
+/>
+
+// Static explorer (no navigation)
+<FileExplorer
+  data={staticFileData}
+  currentPath="C:\\Windows\\System32"
+  viewMode="details"
+  showSearch={false}
+  onFileOpen={(item) => alert(\`Opening: \${item.name}\`)}
+/>
+
+// Windowed File Explorer (easiest usage)
+<WindowedFileExplorer
+  data={fileData()}
+  currentPath={currentPath()}
+  viewMode="icons"
+  showSearch={true}
+  windowWidth="800px"
+  windowHeight="600px"
+  onNavigate={handleNavigation}
+  onFileOpen={(item) => openFile(item)}
+  onWindowClose={() => closeExplorer()}
+/>`}</pre>
+            </div>
+
+            <div style='margin-bottom: 20px;'>
+              <h4>Try the Navigation:</h4>
+              <p style='margin: 8px 0; font-size: 13px; color: #666;'>
+                In the interactive examples above:
+                • Double-click folders to navigate into them<br/>
+                • Use Back/Forward buttons to navigate history<br/>
+                • Click any breadcrumb segment to jump to that location<br/>
+                • Try the Up button to go to parent directory<br/>
+                • Use search to filter files in current directory<br/>
+                • Click window controls (minimize, maximize, close) to test functionality
+              </p>
+            </div>
+
+            <div style='margin-bottom: 20px;'>
+              <h4>Standalone Windowed Component</h4>
+              <p style='margin: 8px 0 16px 0; font-size: 13px; color: #666;'>
+                The <code>WindowedFileExplorer</code> component combines the FileExplorer with a Window for easy usage:
+              </p>
+              <WindowedFileExplorer
+                data={explorerData()}
+                currentPath={explorerPath()}
+                viewMode="details"
+                showSearch={true}
+                searchPlaceholder="Search in standalone window..."
+                windowWidth="750px"
+                windowHeight="400px"
+                onNavigate={(path, item) => {
+                  handleFileExplorerNavigation(path);
+                  console.log('Standalone Navigate to:', path, item);
+                }}
+                onFileSelect={(item, selected) => {
+                  console.log('Standalone Selected:', item.name, 'Total:', selected.length);
+                }}
+                onFileOpen={(item) => {
+                  console.log('Standalone Open:', item);
+                  alert(`Standalone Opening: ${item.name} (${item.type})`);
+                }}
+                onSearchChange={(term, filtered) => {
+                  console.log('Standalone Search:', term, 'Results:', filtered.length);
+                }}
+                onWindowClose={() => alert('Standalone File Explorer would close')}
+                onWindowMinimize={() => alert('Standalone File Explorer minimized')}
+                onWindowMaximize={() => alert('Standalone File Explorer maximized')}
+              />
             </div>
           </div>
         </div>

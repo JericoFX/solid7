@@ -20,3 +20,5 @@ export { Dialog } from './Dialog';
 export { DialogBox } from './DialogBox';
 export { Modal } from './Modal';
 export { ImageViewer } from './ImageViewer';
+export { FileExplorer } from './FileExplorer';
+export { WindowedFileExplorer } from './WindowedFileExplorer';

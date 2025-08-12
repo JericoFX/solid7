@@ -109,3 +109,27 @@ export interface ImageViewerProps {
   showToolbar?: boolean;
   isModal?: boolean;
 }
+
+export interface FileItem {
+  name: string;
+  type: 'file' | 'folder';
+  size?: number;
+  modified?: Date;
+  icon?: string;
+  path?: string;
+}
+
+export interface FileExplorerProps extends BaseProps {
+  data?: FileItem[];
+  currentPath?: string;
+  viewMode?: 'icons' | 'details';
+  showHidden?: boolean;
+  showSearch?: boolean;
+  searchPlaceholder?: string;
+  width?: string;
+  height?: string;
+  onNavigate?: (path: string, item: FileItem) => void;
+  onFileSelect?: (item: FileItem, selectedItems: string[]) => void;
+  onFileOpen?: (item: FileItem) => void;
+  onSearchChange?: (searchTerm: string, filteredItems: FileItem[]) => void;
+}

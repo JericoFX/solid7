@@ -15,13 +15,15 @@ export interface WindowedFileExplorerProps extends FileExplorerProps {
   onWindowMaximize?: () => void;
 }
 
-export const WindowedFileExplorer: Component<WindowedFileExplorerProps> = (props) => {
-  const [isMinimized, setIsMinimized] = createSignal(false);
-  
+export const WindowedFileExplorer: Component<WindowedFileExplorerProps> = (
+  props
+) => {
+  const [_, setIsMinimized] = createSignal(false);
+
   // Generate window title based on current path
   const windowTitle = () => {
     if (props.windowTitle) return props.windowTitle;
-    
+
     const path = props.currentPath;
     if (!path || path === '') {
       return 'Computer - Windows Explorer';
@@ -46,7 +48,7 @@ export const WindowedFileExplorer: Component<WindowedFileExplorerProps> = (props
   return (
     <Window
       title={windowTitle()}
-      width={props.windowWidth || "800px"}
+      width={props.windowWidth || '800px'}
       height={props.windowHeight}
       active={props.active !== false}
       hasSpace={false}
@@ -62,8 +64,8 @@ export const WindowedFileExplorer: Component<WindowedFileExplorerProps> = (props
         showHidden={props.showHidden}
         showSearch={props.showSearch}
         searchPlaceholder={props.searchPlaceholder}
-        width="100%"
-        height="100%"
+        width='100%'
+        height='100%'
         onNavigate={props.onNavigate}
         onFileSelect={props.onFileSelect}
         onFileOpen={props.onFileOpen}

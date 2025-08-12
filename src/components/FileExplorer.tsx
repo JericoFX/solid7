@@ -247,27 +247,25 @@ export const FileExplorer: Component<FileExplorerProps> = (props) => {
             Computer
           </span>
           <Show when={currentPath() && currentPath() !== ''}>
-            {() => {
-              const pathParts = currentPath().split('\\').filter(part => part);
-              return (
-                <For each={pathParts}>
-                  {(part, index) => (
-                    <>
-                      <span class="win7-breadcrumb-separator">►</span>
-                      <span 
-                        class={cn(
-                          'win7-breadcrumb-item',
-                          { 'win7-breadcrumb-current': index() === pathParts.length - 1 }
-                        )}
-                        onClick={() => handleBreadcrumbClick(index(), pathParts)}
-                      >
-                        {part}
-                      </span>
-                    </>
-                  )}
-                </For>
-              );
-            }}
+            <For each={currentPath().split('\\').filter(part => part)}>
+              {(part, index) => {
+                const pathParts = currentPath().split('\\').filter(part => part);
+                return (
+                  <>
+                    <span class="win7-breadcrumb-separator">►</span>
+                    <span 
+                      class={cn(
+                        'win7-breadcrumb-item',
+                        { 'win7-breadcrumb-current': index() === pathParts.length - 1 }
+                      )}
+                      onClick={() => handleBreadcrumbClick(index(), pathParts)}
+                    >
+                      {part}
+                    </span>
+                  </>
+                );
+              }}
+            </For>
           </Show>
         </div>
       </div>

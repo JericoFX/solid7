@@ -1,5 +1,5 @@
 import { Component, Show } from 'solid-js';
-import clsx from 'clsx';
+import { cn } from '../utils/cn';
 
 export interface BalloonProps {
   content: string;
@@ -10,7 +10,8 @@ export interface BalloonProps {
 }
 
 export const Balloon: Component<BalloonProps> = (props) => {
-  const balloonClass = () => clsx(
+  const balloonClass = () => cn(
+    'balloon', // Base class for 7.css styling
     {
       'is-top': props.position === 'top',
       'is-bottom': props.position === 'bottom', 

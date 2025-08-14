@@ -1,5 +1,5 @@
 import { Component, mergeProps, splitProps } from 'solid-js';
-import clsx from 'clsx';
+import { cn } from '../utils/cn';
 import { ButtonProps } from '../types';
 
 export const Button: Component<ButtonProps> = (props) => {
@@ -7,7 +7,7 @@ export const Button: Component<ButtonProps> = (props) => {
   const [local, others] = splitProps(merged, ['variant', 'class', 'children']);
 
   const buttonClass = () => {
-    return clsx(
+    return cn(
       {
         'default': local.variant === 'default'
       },

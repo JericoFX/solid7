@@ -1,0 +1,119 @@
+/* Notepad Component Styles */
+.notepad-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f0f0;
+}
+
+.notepad-content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+}
+
+.notepad-textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 11pt;
+  line-height: 1.2;
+  padding: 8px;
+  margin: 0;
+  background-color: white;
+  color: black;
+}
+
+.notepad-textarea.word-wrap {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.notepad-textarea.no-word-wrap {
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
+  overflow-x: auto;
+}
+
+.notepad-textarea:focus {
+  outline: none;
+}
+
+.notepad-status-bar {
+  border-top: 1px solid #d0d0d0;
+  background-color: #f0f0f0;
+  font-size: 11px;
+  height: auto;
+  min-height: 22px;
+}
+
+/* Menu bar overrides for Notepad */
+.notepad-container .menu-bar {
+  background: linear-gradient(to bottom, #f8f8f8 0%, #e5e5e5 100%);
+  border-bottom: 1px solid #d0d0d0;
+  font-size: 11px;
+  padding: 0;
+  height: 22px;
+}
+
+.notepad-container .menu-bar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  height: 100%;
+}
+
+.notepad-container .menu-bar li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.notepad-container .menu-bar > ul > li {
+  padding: 4px 8px;
+}
+
+.notepad-container .menu-bar button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.notepad-container .menu-bar li:hover {
+  background-color: #ddd;
+}
+
+/* Ensure proper scrollbar styling for the textarea */
+.notepad-textarea::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.notepad-textarea::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border: 1px inset #ddd;
+}
+
+.notepad-textarea::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 50%, #b0b0b0 100%);
+  border: 1px outset #ddd;
+}
+
+.notepad-textarea::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 100%);
+}
+
+.notepad-textarea::-webkit-scrollbar-corner {
+  background: #f0f0f0;
+}

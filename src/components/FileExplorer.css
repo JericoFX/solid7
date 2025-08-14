@@ -1,0 +1,472 @@
+/* Windows 7 File Explorer Styles */
+
+.win7-file-explorer {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #c0c1cd;
+  font: 9pt "Segoe UI", SegoeUI, "Noto Sans", sans-serif;
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+  min-width: 400px;
+}
+
+/* Address Bar */
+.win7-explorer-address-bar {
+  background: linear-gradient(180deg, #ffffff 45%, #fafafa 0%, #f0f0f0);
+  border-bottom: 1px solid #d7d7d7;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.win7-explorer-nav-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+.win7-explorer-nav-button {
+  background: linear-gradient(#f2f2f2 45%, #ebebeb 0%, #cfcfcf);
+  border: 1px solid #8e8f8f;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px #fffc;
+  color: #222;
+  font-size: 12px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 0;
+}
+
+.win7-explorer-nav-button:hover {
+  border-color: #3c7fb1;
+  background: linear-gradient(#eaf6fd 45%, #bee6fd 0%, #a7d9f5);
+}
+
+.win7-explorer-nav-button:active {
+  border-color: #6d91ab;
+  background: linear-gradient(#e5f4fc, #c4e5f6 30% 50%, #98d1ef 50%, #68b3db);
+}
+
+.win7-explorer-nav-button:disabled {
+  background: #f4f4f4;
+  border-color: #adb2b5;
+  color: #838383;
+  cursor: not-allowed;
+}
+
+/* Breadcrumb Navigation */
+.win7-explorer-breadcrumb {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  margin-left: 8px;
+}
+
+.win7-breadcrumb-item {
+  color: #0066cc;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+.win7-breadcrumb-item:hover {
+  background: #e6f0ff;
+  text-decoration: underline;
+}
+
+.win7-breadcrumb-current {
+  color: #000000;
+  cursor: default;
+  font-weight: 600;
+}
+
+.win7-breadcrumb-current:hover {
+  background: none;
+  text-decoration: none;
+}
+
+.win7-breadcrumb-separator {
+  color: #666;
+  font-size: 10px;
+  user-select: none;
+}
+
+/* Search Bar */
+.win7-explorer-search-bar {
+  background: linear-gradient(180deg, #ffffff 45%, #fafafa 0%, #f0f0f0);
+  border-bottom: 1px solid #d7d7d7;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+}
+
+.win7-explorer-search-input {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid #abadb3;
+  padding: 4px 8px;
+  font: 9pt "Segoe UI", SegoeUI, "Noto Sans", sans-serif;
+  color: #000;
+  border-radius: 2px;
+  outline: none;
+  box-shadow: inset 1px 1px 2px #00000020;
+}
+
+.win7-explorer-search-input:focus {
+  border-color: #3c7fb1;
+  box-shadow: inset 1px 1px 2px #00000020, 0 0 0 1px #bee6fd;
+}
+
+.win7-explorer-search-clear {
+  background: linear-gradient(#f2f2f2 45%, #ebebeb 0%, #cfcfcf);
+  border: 1px solid #8e8f8f;
+  border-radius: 3px;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.win7-explorer-search-clear:hover {
+  border-color: #3c7fb1;
+  background: linear-gradient(#eaf6fd 45%, #bee6fd 0%, #a7d9f5);
+}
+
+/* Content Area */
+.win7-explorer-content {
+  flex: 1;
+  overflow: auto;
+  background: #ffffff;
+  position: relative;
+  border-top: 1px solid #ffffff;
+}
+
+/* Icons View */
+.win7-explorer-icons-view {
+  padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 8px;
+  align-items: start;
+}
+
+.win7-explorer-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 6px 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 3px;
+  min-height: 60px;
+  justify-content: flex-start;
+}
+
+.win7-explorer-item:hover {
+  background: linear-gradient(#fff9, #e6ecf5cc 90%, #fffc);
+  border: 1px solid #aaddfa;
+}
+
+.win7-explorer-item-selected {
+  background: linear-gradient(#fff9, #e6ecf5cc 90%, #fffc) !important;
+  border: 1px solid #aaddfa !important;
+}
+
+.win7-explorer-item-icon {
+  font-size: 32px;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.win7-explorer-item-name {
+  font-size: 11px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.2;
+  max-width: 72px;
+  color: #000;
+}
+
+/* Details View */
+.win7-explorer-details-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.win7-explorer-details-header {
+  background: linear-gradient(180deg, #ffffff 45%, #fafafa 0%, #f0f0f0);
+  border-bottom: 1px solid #d7d7d7;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.win7-explorer-details-col {
+  padding: 4px 8px;
+  font-weight: 400;
+  color: #000;
+  cursor: pointer;
+  user-select: none;
+  border-right: 1px solid #d7d7d7;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  box-sizing: border-box;
+}
+
+.win7-explorer-details-col:last-child {
+  border-right: none;
+}
+
+.win7-explorer-details-col:hover {
+  background: linear-gradient(180deg, #f3f9fc 45%, #e4f0f8 0%, #d9eaf5);
+  border-color: #a7d8f5;
+}
+
+.win7-explorer-details-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.win7-explorer-details-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  cursor: pointer;
+  min-height: 18px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.win7-explorer-details-row:hover {
+  background: linear-gradient(#fff9, #e6ecf5cc 90%, #fffc);
+}
+
+.win7-explorer-details-row-selected {
+  background: linear-gradient(#fff9, #e6ecf5cc 90%, #fffc) !important;
+  border-top: 1px solid #aaddfa;
+  border-bottom: 1px solid #aaddfa;
+}
+
+.win7-explorer-details-cell {
+  padding: 2px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  color: #000;
+  border-right: 1px solid #f0f0f0;
+}
+
+.win7-explorer-details-cell:last-child {
+  border-right: none;
+}
+
+/* Status Bar */
+.win7-explorer-status {
+  background: linear-gradient(180deg, #ffffff 45%, #fafafa 0%, #f0f0f0);
+  border-top: 1px solid #d7d7d7;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: #000;
+  min-height: 20px;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.win7-status-info {
+  color: #333;
+}
+
+.win7-status-search {
+  color: #666;
+  font-style: italic;
+}
+
+/* Scrollbars - Windows 7 Style */
+.win7-explorer-content::-webkit-scrollbar,
+.win7-explorer-details-content::-webkit-scrollbar {
+  width: 17px;
+  height: 17px;
+}
+
+.win7-explorer-content::-webkit-scrollbar-track,
+.win7-explorer-details-content::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border: 1px solid #d7d7d7;
+}
+
+.win7-explorer-content::-webkit-scrollbar-thumb,
+.win7-explorer-details-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(#f2f2f2 45%, #ebebeb 0%, #cfcfcf);
+  border: 1px solid #8e8f8f;
+  border-radius: 3px;
+  min-height: 20px;
+  box-shadow: inset 0 0 0 1px #fffc;
+}
+
+.win7-explorer-content::-webkit-scrollbar-thumb:hover,
+.win7-explorer-details-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(#eaf6fd 45%, #bee6fd 0%, #a7d9f5);
+  border-color: #3c7fb1;
+}
+
+.win7-explorer-content::-webkit-scrollbar-thumb:active,
+.win7-explorer-details-content::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(#e5f4fc, #c4e5f6 30% 50%, #98d1ef 50%, #68b3db);
+  border-color: #6d91ab;
+}
+
+.win7-explorer-content::-webkit-scrollbar-corner,
+.win7-explorer-details-content::-webkit-scrollbar-corner {
+  background: #f0f0f0;
+  border: 1px solid #d7d7d7;
+}
+
+/* Scrollbar buttons */
+.win7-explorer-content::-webkit-scrollbar-button,
+.win7-explorer-details-content::-webkit-scrollbar-button {
+  background: linear-gradient(#f2f2f2 45%, #ebebeb 0%, #cfcfcf);
+  border: 1px solid #8e8f8f;
+  width: 17px;
+  height: 17px;
+  box-shadow: inset 0 0 0 1px #fffc;
+}
+
+.win7-explorer-content::-webkit-scrollbar-button:hover,
+.win7-explorer-details-content::-webkit-scrollbar-button:hover {
+  background: linear-gradient(#eaf6fd 45%, #bee6fd 0%, #a7d9f5);
+  border-color: #3c7fb1;
+}
+
+.win7-explorer-content::-webkit-scrollbar-button:active,
+.win7-explorer-details-content::-webkit-scrollbar-button:active {
+  background: linear-gradient(#e5f4fc, #c4e5f6 30% 50%, #98d1ef 50%, #68b3db);
+  border-color: #6d91ab;
+}
+
+/* Arrow decorations for scrollbar buttons */
+.win7-explorer-content::-webkit-scrollbar-button:vertical:start:decrement,
+.win7-explorer-details-content::-webkit-scrollbar-button:vertical:start:decrement {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M1 6l3-3 3 3' stroke='%23333' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.win7-explorer-content::-webkit-scrollbar-button:vertical:end:increment,
+.win7-explorer-details-content::-webkit-scrollbar-button:vertical:end:increment {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M1 2l3 3 3-3' stroke='%23333' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.win7-explorer-content::-webkit-scrollbar-button:horizontal:start:decrement,
+.win7-explorer-details-content::-webkit-scrollbar-button:horizontal:start:decrement {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M6 1l-3 3 3 3' stroke='%23333' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.win7-explorer-content::-webkit-scrollbar-button:horizontal:end:increment,
+.win7-explorer-details-content::-webkit-scrollbar-button:horizontal:end:increment {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2 1l3 3-3 3' stroke='%23333' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Empty state */
+.win7-explorer-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: #666;
+  font-style: italic;
+}
+
+.win7-explorer-empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+/* Focus styles */
+.win7-explorer-item:focus,
+.win7-explorer-details-row:focus {
+  outline: 1px dotted #000;
+  outline-offset: -1px;
+}
+
+/* Selection styles for keyboard navigation */
+.win7-file-explorer:focus-within .win7-explorer-item-selected,
+.win7-file-explorer:focus-within .win7-explorer-details-row-selected {
+  background: linear-gradient(#316ac5, #1f4788) !important;
+  color: white !important;
+  border-color: #1f4788 !important;
+}
+
+.win7-file-explorer:focus-within .win7-explorer-item-selected .win7-explorer-item-name,
+.win7-file-explorer:focus-within .win7-explorer-details-row-selected .win7-explorer-details-cell {
+  color: white !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .win7-explorer-icons-view {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 4px;
+  }
+  
+  .win7-explorer-details-header {
+    grid-template-columns: 3fr 1fr 1fr;
+  }
+  
+  .win7-explorer-details-row {
+    grid-template-columns: 3fr 1fr 1fr;
+  }
+  
+  .win7-explorer-details-col:last-child,
+  .win7-explorer-details-cell:last-child {
+    display: none;
+  }
+}
+
+/* High DPI / Retina display support */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .win7-explorer-item-icon {
+    font-size: 28px;
+  }
+}

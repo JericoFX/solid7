@@ -1,5 +1,5 @@
 import { Component, Show } from 'solid-js';
-import clsx from 'clsx';
+import { cn } from '../utils/cn';
 import { Window } from './Window';
 
 export interface DialogProps {
@@ -13,7 +13,7 @@ export interface DialogProps {
 }
 
 export const Dialog: Component<DialogProps> = (props) => {
-  const dialogClass = () => clsx('dialog', props.class);
+  const dialogClass = () => cn('dialog', props.class);
 
   return (
     <Show when={props.isOpen}>

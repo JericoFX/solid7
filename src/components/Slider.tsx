@@ -1,12 +1,12 @@
 import { Component, splitProps, Show } from 'solid-js';
-import clsx from 'clsx';
+import { cn } from '../utils/cn';
 import { SliderProps } from '../types';
 
 export const Slider: Component<SliderProps> = (props) => {
   const [local, others] = splitProps(props, ['hasBoxIndicator', 'vertical', 'class']);
 
   const sliderClass = () => {
-    return clsx(
+    return cn(
       {
         'has-box-indicator': local.hasBoxIndicator
       },
@@ -15,7 +15,7 @@ export const Slider: Component<SliderProps> = (props) => {
   };
 
   const wrapperClass = () => {
-    return clsx({
+    return cn({
       'is-vertical': local.vertical
     });
   };

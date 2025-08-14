@@ -26,6 +26,8 @@
   - [Dialog](#dialog)
   - [DialogBox](#dialogbox)
   - [Modal](#modal)
+- [Application Components](#application-components)
+  - [Notepad](#notepad)
 
 ---
 
@@ -893,6 +895,198 @@ const [showModal, setShowModal] = createSignal(false);
   </div>
 </Modal>
 ```
+
+---
+
+## Application Components
+
+### Notepad
+
+A fully functional Windows 7-style Notepad text editor with menus, status bar, and comprehensive text editing features.
+
+#### Props
+
+```tsx
+interface NotepadProps {
+  width?: string;
+  height?: string;
+  title?: string;
+  content?: string;
+  onContentChange?: (content: string) => void;
+  onClose?: () => void;
+  onMinimize?: () => void;
+  onMaximize?: () => void;
+  fileName?: string;
+  wordWrap?: boolean;
+  showStatusBar?: boolean;
+  class?: string;
+}
+```
+
+#### Features
+
+- **Complete Menu System**: File, Edit, Format, View, and Help menus with keyboard shortcuts
+- **Real-time Text Editing**: Full textarea with undo tracking and clipboard operations
+- **Status Bar**: Shows cursor position, zoom level, encoding, line count, and character count
+- **Word Wrap Toggle**: Switch between wrapped and unwrapped text display
+- **File Operations**: New, Open, Save, Save As with modified state tracking
+- **Edit Operations**: Cut, Copy, Paste, Find, Replace, Select All with proper state management
+- **Authentic Styling**: Uses Consolas/Courier New monospace font with Windows 7 styling
+- **Window Integration**: Full window controls with minimize, maximize, and close functionality
+
+#### Menu Structure
+
+**File Menu**:
+- New (Ctrl+N)
+- Open... (Ctrl+O)
+- Save (Ctrl+S)
+- Save As... (Ctrl+Shift+S)
+- Exit
+
+**Edit Menu**:
+- Undo (Ctrl+Z) - disabled when no undo available
+- Cut (Ctrl+X) - disabled when no text selected
+- Copy (Ctrl+C) - disabled when no text selected
+- Paste (Ctrl+V) - disabled when clipboard empty
+- Find... (Ctrl+F)
+- Find Next (F3)
+- Replace... (Ctrl+H)
+- Go To... (Ctrl+G)
+- Select All (Ctrl+A)
+- Time/Date (F5)
+
+**Format Menu**:
+- Word Wrap - toggles text wrapping
+- Font... - font selection dialog
+
+**View Menu**:
+- Status Bar - toggles status bar visibility
+
+**Help Menu**:
+- Help Topics
+- About Notepad
+
+#### Status Bar Information
+
+- **Cursor Position**: Current line and column number
+- **Zoom Level**: Display zoom percentage (100%)
+- **Encoding**: Text encoding (UTF-8)
+- **Line Count**: Total number of lines
+- **Character Count**: Total number of characters
+
+#### Basic Usage
+
+```tsx
+import { Notepad } from './components';
+
+// Basic text editor
+<Notepad />
+
+// Text editor with initial content
+<Notepad 
+  content="Hello World!"
+  fileName="welcome.txt"
+/>
+
+// Customized text editor
+<Notepad
+  width="800px"
+  height="600px"
+  content="Initial content here..."
+  fileName="document.txt"
+  wordWrap={true}
+  showStatusBar={true}
+  onContentChange={(content) => console.log('Content:', content)}
+  onClose={() => handleClose()}
+  onMinimize={() => handleMinimize()}
+  onMaximize={() => handleMaximize()}
+/>
+```
+
+#### Advanced Features
+
+```tsx
+// Handle content changes
+const [notepadContent, setNotepadContent] = createSignal('');
+
+<Notepad
+  content={notepadContent()}
+  onContentChange={setNotepadContent}
+  fileName="auto-save.txt"
+/>
+
+// Custom window controls
+<Notepad
+  onClose={() => {
+    if (confirm('Save changes?')) {
+      saveFile();
+    }
+    closeWindow();
+  }}
+  onMinimize={() => minimizeToTray()}
+  onMaximize={() => toggleFullscreen()}
+/>
+
+// Without status bar or word wrap
+<Notepad
+  showStatusBar={false}
+  wordWrap={false}
+  width="600px"
+  height="400px"
+/>
+```
+
+#### Event Handlers
+
+```tsx
+// Menu event handlers are handled internally, but you can customize:
+<Notepad
+  onContentChange={(content) => {
+    // Auto-save functionality
+    if (content.length > 0) {
+      autoSave(content);
+    }
+  }}
+  onClose={() => {
+    // Confirm unsaved changes
+    if (hasUnsavedChanges()) {
+      const result = confirm('Save changes before closing?');
+      if (result) {
+        saveFile();
+      }
+    }
+    closeApplication();
+  }}
+/>
+```
+
+#### Styling
+
+The Notepad component includes built-in CSS for authentic Windows 7 styling:
+
+- Consolas/Courier New monospace font
+- Proper scrollbar styling
+- Menu bar with Windows 7 gradient
+- Status bar with inset border
+- Textarea with proper focus handling
+
+```tsx
+// Custom styling
+<Notepad 
+  class="custom-notepad"
+  width="100vw"
+  height="100vh"
+/>
+```
+
+#### Technical Notes
+
+- **Modified State**: Automatically tracks when content differs from initial content
+- **Clipboard Integration**: Uses modern Clipboard API with fallback support
+- **Cursor Tracking**: Real-time line and column position updates
+- **Menu State**: Dynamic enable/disable of menu items based on selection and undo state
+- **File Name Display**: Shows in window title with modified indicator (*)
+- **Keyboard Navigation**: Supports standard text editing keyboard shortcuts
 
 ---
 

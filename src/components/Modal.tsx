@@ -1,6 +1,6 @@
 import { Component, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
-import clsx from 'clsx';
+import { cn } from '../utils/cn';
 import './dialog.css';
 
 export interface ModalProps {
@@ -12,7 +12,7 @@ export interface ModalProps {
 }
 
 export const Modal: Component<ModalProps> = (props) => {
-  const modalClass = () => clsx('window dialog-box', props.class);
+  const modalClass = () => cn('window dialog-box', props.class);
   
   const handleOverlayClick = (e: MouseEvent) => {
     if (e.target === e.currentTarget) {

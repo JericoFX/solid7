@@ -1,5 +1,5 @@
 import { Component, Show, splitProps } from 'solid-js';
-import clsx from 'clsx';
+import { cn } from '../utils/cn';
 
 export interface TextBoxProps {
   label?: string;
@@ -12,7 +12,7 @@ export interface TextBoxProps {
 export const TextBox: Component<TextBoxProps> = (props) => {
   const [local, others] = splitProps(props, ['label', 'labelPosition', 'class', 'type']);
   
-  const containerClass = () => clsx(
+  const containerClass = () => cn(
     'field-row',
     {
       'field-row-stacked': local.labelPosition === 'top'

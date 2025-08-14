@@ -7,11 +7,12 @@ export const ProgressBar: Component<ProgressBarProps> = (props) => {
 
   const progressClass = () => {
     return cn(
+      'progressbar', // Base class for 7.css styling
       {
-        'paused': merged.paused,
-        'error': merged.error,
-        'animate': merged.animate,
-        'marquee': merged.marquee
+        paused: merged.paused,
+        error: merged.error,
+        animate: merged.animate,
+        marquee: merged.marquee,
       },
       merged.class
     );
@@ -24,14 +25,19 @@ export const ProgressBar: Component<ProgressBarProps> = (props) => {
   };
 
   return (
-    <div 
-      role="progressbar" 
+    <div
+      role='progressbar'
       aria-valuenow={merged.value}
       aria-valuemin={merged.min}
       aria-valuemax={merged.max}
       class={progressClass()}
     >
-      <div style={{ width: `${percentage()}%` }}></div>
+      <div
+        style={{
+          width: `${Math.round(percentage())}%`,
+          transition: 'width 0.3s ease-in-out',
+        }}
+      ></div>
     </div>
   );
 };

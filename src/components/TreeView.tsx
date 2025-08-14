@@ -1,5 +1,5 @@
 import { Component, For, Show, createSignal } from 'solid-js';
-import clsx from 'clsx';
+import { cn } from '../utils/cn';
 
 export interface TreeViewNode {
   id: string;
@@ -44,7 +44,7 @@ export const TreeView: Component<TreeViewProps> = (props) => {
     const hasChildren = nodeProps.node.children && nodeProps.node.children.length > 0;
     const isExpanded = () => expandedNodes().has(nodeProps.node.id);
 
-    const nodeClass = () => clsx(
+    const nodeClass = () => cn(
       'tree-node',
       {
         'tree-node-selected': nodeProps.node.selected,
@@ -62,7 +62,7 @@ export const TreeView: Component<TreeViewProps> = (props) => {
         >
           <Show when={hasChildren}>
             <span 
-              class={clsx('tree-node-toggle', { 'expanded': isExpanded() })}
+              class={cn('tree-node-toggle', { 'expanded': isExpanded() })}
               onClick={(e) => {
                 e.stopPropagation();
                 toggleNode(nodeProps.node.id);
@@ -88,7 +88,7 @@ export const TreeView: Component<TreeViewProps> = (props) => {
     );
   };
 
-  const treeClass = () => clsx('tree-view', props.class);
+  const treeClass = () => cn('tree-view', props.class);
 
   return (
     <div class={treeClass()}>

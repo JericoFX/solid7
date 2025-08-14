@@ -213,10 +213,11 @@ export const FileExplorer: Component<FileExplorerProps> = (props) => {
     <div class={cn('win7-file-explorer', props.class)} style={explorerStyle()}>
       {/* Address Bar */}
       <div class="win7-explorer-address-bar">
-        <div class="win7-explorer-nav-buttons">
+        <div class="win7-explorer-nav-buttons" role="toolbar" aria-label="Navigation controls">
           <button 
             class="win7-explorer-nav-button" 
             title="Back"
+            aria-label="Go back to previous location"
             disabled={!canGoBack()}
             onClick={handleGoBack}
           >
@@ -225,6 +226,7 @@ export const FileExplorer: Component<FileExplorerProps> = (props) => {
           <button 
             class="win7-explorer-nav-button" 
             title="Forward"
+            aria-label="Go forward to next location"
             disabled={!canGoForward()}
             onClick={handleGoForward}
           >
@@ -233,13 +235,14 @@ export const FileExplorer: Component<FileExplorerProps> = (props) => {
           <button 
             class="win7-explorer-nav-button" 
             title="Up"
+            aria-label="Go up to parent directory"
             disabled={!canGoUp()}
             onClick={handleGoUp}
           >
             ↑
           </button>
         </div>
-        <div class="win7-explorer-breadcrumb">
+        <nav class="win7-explorer-breadcrumb" role="navigation" aria-label="Directory breadcrumb">
           <span 
             class="win7-breadcrumb-item"
             onClick={() => navigateToPath('')}
@@ -267,7 +270,7 @@ export const FileExplorer: Component<FileExplorerProps> = (props) => {
               }}
             </For>
           </Show>
-        </div>
+        </nav>
       </div>
 
       {/* Search Bar */}
@@ -297,22 +300,22 @@ export const FileExplorer: Component<FileExplorerProps> = (props) => {
         <Show 
           when={props.viewMode !== 'details'} 
           fallback={
-            <div class="win7-explorer-details-view">
-              <div class="win7-explorer-details-header">
-                <div class="win7-explorer-details-col" onClick={() => handleSort('name')}>
+            <div class="win7-explorer-details-view" role="table" aria-label="File and folder listing">
+              <div class="win7-explorer-details-header" role="row">
+                <div class="win7-explorer-details-col" role="columnheader" tabindex="0" onClick={() => handleSort('name')}>
                   Name {sortBy() === 'name' && (sortDirection() === 'asc' ? '▲' : '▼')}
                 </div>
-                <div class="win7-explorer-details-col" onClick={() => handleSort('type')}>
+                <div class="win7-explorer-details-col" role="columnheader" tabindex="0" onClick={() => handleSort('type')}>
                   Type {sortBy() === 'type' && (sortDirection() === 'asc' ? '▲' : '▼')}
                 </div>
-                <div class="win7-explorer-details-col" onClick={() => handleSort('size')}>
+                <div class="win7-explorer-details-col" role="columnheader" tabindex="0" onClick={() => handleSort('size')}>
                   Size {sortBy() === 'size' && (sortDirection() === 'asc' ? '▲' : '▼')}
                 </div>
-                <div class="win7-explorer-details-col" onClick={() => handleSort('modified')}>
+                <div class="win7-explorer-details-col" role="columnheader" tabindex="0" onClick={() => handleSort('modified')}>
                   Date Modified {sortBy() === 'modified' && (sortDirection() === 'asc' ? '▲' : '▼')}
                 </div>
               </div>
-              <div class="win7-explorer-details-content">
+              <div class="win7-explorer-details-content" role="rowgroup">
                 <For each={filteredData()}>
                   {(item) => (
                     <div
@@ -320,6 +323,10 @@ export const FileExplorer: Component<FileExplorerProps> = (props) => {
                         'win7-explorer-details-row',
                         { 'win7-explorer-details-row-selected': selectedItems().includes(item.name) }
                       )}
+                      role="row"
+                      aria-selected={selectedItems().includes(item.name)}
+                      aria-label={`${item.type === 'folder' ? 'Folder' : 'File'}: ${item.name}`}
+                      tabindex="0"
                       onClick={(e) => handleItemClick(item, e)}
                       onDblClick={() => handleItemDoubleClick(item)}
                     >
@@ -353,6 +360,10 @@ export const FileExplorer: Component<FileExplorerProps> = (props) => {
                     'win7-explorer-item',
                     { 'win7-explorer-item-selected': selectedItems().includes(item.name) }
                   )}
+                  role="button"
+                  aria-selected={selectedItems().includes(item.name)}
+                  aria-label={`${item.type === 'folder' ? 'Folder' : 'File'}: ${item.name}`}
+                  tabindex="0"
                   onClick={(e) => handleItemClick(item, e)}
                   onDblClick={() => handleItemDoubleClick(item)}
                   title={item.name}

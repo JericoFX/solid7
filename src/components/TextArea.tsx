@@ -1,5 +1,5 @@
 import { Component, Show, splitProps } from 'solid-js';
-import clsx from 'clsx';
+import { cn } from '../utils/cn';
 
 export interface TextAreaProps {
   label?: string;
@@ -13,7 +13,7 @@ export interface TextAreaProps {
 export const TextArea: Component<TextAreaProps> = (props) => {
   const [local, others] = splitProps(props, ['label', 'labelPosition', 'class', 'rows', 'cols']);
   
-  const containerClass = () => clsx(
+  const containerClass = () => cn(
     'field-row',
     {
       'field-row-stacked': local.labelPosition === 'top'

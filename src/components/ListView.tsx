@@ -1,4 +1,4 @@
-import { Component, For, createSignal } from 'solid-js';
+import { Component, createMemo, For } from 'solid-js';
 import { cn } from '../utils/cn';
 
 export interface ListViewColumn {
@@ -28,11 +28,13 @@ export interface ListViewProps {
 }
 
 export const ListView: Component<ListViewProps> = (props) => {
-  const tableClass = () => cn(
-    {
-      'has-shadow': props.hasShadow
-    },
-    props.class
+  const tableClass = createMemo(() =>
+    cn(
+      {
+        'has-shadow': props.hasShadow,
+      },
+      props.class
+    )
   );
 
   const handleRowClick = (item: ListViewItem) => {
@@ -57,7 +59,7 @@ export const ListView: Component<ListViewProps> = (props) => {
 
   const getRowClass = (item: ListViewItem) => {
     return cn({
-      'highlighted': item.selected && !item.disabled
+      highlighted: item.selected && !item.disabled,
     });
   };
 
@@ -67,15 +69,15 @@ export const ListView: Component<ListViewProps> = (props) => {
         <tr>
           <For each={props.columns}>
             {(column) => (
-              <th 
+              <th
                 class={cn({
-                  'highlighted': true,
-                  'indicator': column.sortable && column.sorted,
-                  'up': column.sorted === 'asc'
+                  highlighted: true,
+                  indicator: column.sortable && column.sorted,
+                  up: column.sorted === 'asc',
                 })}
                 style={{
                   ...(column.width ? { width: column.width } : {}),
-                  cursor: column.sortable ? 'pointer' : 'default'
+                  cursor: column.sortable ? 'pointer' : 'default',
                 }}
                 onClick={() => handleHeaderClick(column)}
               >
@@ -88,7 +90,7 @@ export const ListView: Component<ListViewProps> = (props) => {
       <tbody>
         <For each={props.items}>
           {(item) => (
-            <tr 
+            <tr
               class={getRowClass(item)}
               aria-disabled={item.disabled}
               onClick={() => handleRowClick(item)}
@@ -96,9 +98,7 @@ export const ListView: Component<ListViewProps> = (props) => {
               style={{ cursor: item.disabled ? 'default' : 'pointer' }}
             >
               <For each={props.columns}>
-                {(column) => (
-                  <td>{item[column.key]}</td>
-                )}
+                {(column) => <td>{item[column.key]}</td>}
               </For>
             </tr>
           )}

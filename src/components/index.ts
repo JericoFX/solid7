@@ -25,3 +25,4 @@ export { WindowedFileExplorer } from './WindowedFileExplorer';
 export { Notepad } from './Notepad';
 export { NotepadMenuBar } from './NotepadMenuBar';
 export { Form } from './Form';
+export { Scrollbar } from './Scrollbar';

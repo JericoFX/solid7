@@ -1,0 +1,47 @@
+/* Windows 7 StatusBar styling integrated within Window component */
+.status-bar {
+  background: linear-gradient(180deg, #ffffff 45%, #fafafa 0%, #f0f0f0);
+  border-top: 1px solid #d7d7d7;
+  position: relative;
+  bottom: 0;
+  z-index: 10;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: 9pt 'Segoe UI', SegoeUI, 'Noto Sans', sans-serif;
+  min-height: 1.5rem;
+  box-sizing: border-box;
+}
+
+.status-bar-field {
+  font-size: 11px;
+  color: #333;
+  padding: 2px 8px;
+  border-right: 1px solid #d7d7d7;
+  flex-shrink: 0;
+}
+
+.status-bar-field:last-child {
+  border-right: none;
+  margin-left: auto; /* Push last field to the right */
+}
+
+/* Ensure proper window layout with status bar */
+.window {
+  display: flex;
+  flex-direction: column;
+}
+
+.window-body {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Ensure status bar sticks to bottom of window */
+.window > .status-bar {
+  margin-top: auto;
+}
+* {
+  user-select: none;
+}

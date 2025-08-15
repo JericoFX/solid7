@@ -25,6 +25,7 @@ import {
   FileExplorer,
   WindowedFileExplorer,
   Notepad,
+  Scrollbar,
 } from '../components';
 import './App.css';
 
@@ -1134,7 +1135,15 @@ const handleNavigation = (path: string, item: FileItem) => {
 
   return (
     <div class='app'>
-      <Window title='Solid 7.CSS Playground' width='100vw' active glass>
+      <Window
+        title='Solid 7.CSS Playground'
+        width='100vw'
+        active
+        glass
+        statusBar={{
+          fields: statusFields,
+        }}
+      >
         <div class='playground-content'>
           <h1>🪟 Solid 7.CSS Components</h1>
           <p>
@@ -1315,6 +1324,9 @@ const handleNavigation = (path: string, item: FileItem) => {
                   <p style='margin: 8px;'>
                     This window has no padding (hasSpace=false).
                   </p>
+                  <Scrollbar width='23px' height='100px'>
+                    <p>Scrollable content goes here.</p>
+                  </Scrollbar>
                   <div style='padding: 8px;'>
                     <Button variant='default'>Action Button</Button>
                   </div>
@@ -1323,8 +1335,6 @@ const handleNavigation = (path: string, item: FileItem) => {
             </div>
           </div>
         </div>
-
-        <StatusBar fields={statusFields} />
       </Window>
 
       <DialogBox

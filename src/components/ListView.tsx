@@ -28,8 +28,6 @@ export interface ListViewProps {
 }
 
 export const ListView: Component<ListViewProps> = (props) => {
-  const [hoveredRow, setHoveredRow] = createSignal<string | null>(null);
-  
   const tableClass = () => cn(
     {
       'has-shadow': props.hasShadow
@@ -57,33 +55,10 @@ export const ListView: Component<ListViewProps> = (props) => {
     }
   };
 
-  const getRowStyle = (item: ListViewItem) => {
-    const baseStyle: any = item.disabled 
-      ? { opacity: '0.5', 'pointer-events': 'none' } 
-      : { cursor: 'pointer' };
-
-    // Hover effect (light blue like menu items)
-    if (hoveredRow() === item.id && !item.disabled) {
-      return {
-        ...baseStyle,
-        background: 'var(--w7-li-bg-hl, linear-gradient(#fff9,#e6ecf5cc 90%,#fffc))',
-        border: '1px solid var(--w7-li-bd-hl, #aaddfa)',
-        'border-radius': 'var(--w7-el-bdr, 3px)'
-      };
-    }
-
-    // Selection effect (darker blue like navigation)
-    if (item.selected && !item.disabled) {
-      return {
-        ...baseStyle,
-        background: '#3399ff',
-        color: '#fff',
-        border: '1px solid #2288ee',
-        'border-radius': 'var(--w7-el-bdr, 3px)'
-      };
-    }
-
-    return baseStyle;
+  const getRowClass = (item: ListViewItem) => {
+    return cn({
+      'highlighted': item.selected && !item.disabled
+    });
   };
 
   return (
@@ -114,11 +89,11 @@ export const ListView: Component<ListViewProps> = (props) => {
         <For each={props.items}>
           {(item) => (
             <tr 
+              class={getRowClass(item)}
+              aria-disabled={item.disabled}
               onClick={() => handleRowClick(item)}
               onDblClick={() => handleRowDoubleClick(item)}
-              onMouseEnter={() => setHoveredRow(item.id)}
-              onMouseLeave={() => setHoveredRow(null)}
-              style={getRowStyle(item)}
+              style={{ cursor: item.disabled ? 'default' : 'pointer' }}
             >
               <For each={props.columns}>
                 {(column) => (

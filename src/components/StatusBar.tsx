@@ -11,7 +11,7 @@ export const StatusBar: Component<StatusBarProps> = (props) => {
     <div class={statusBarClass()}>
       <For each={props.fields}>
         {(field) => (
-          <div class="status-bar-field">
+          <div class={cn('status-bar-field')}>
             {field.content}
           </div>
         )}

@@ -46,7 +46,7 @@
 
 /* Label Styling with Fixed Width */
 .form-label {
-  font: 9pt "Segoe UI", "SegoeUI", "Noto Sans", sans-serif;
+  font: 9pt 'Segoe UI', 'SegoeUI', 'Noto Sans', sans-serif;
   color: #000;
   display: flex;
   align-items: center;
@@ -59,6 +59,7 @@
   box-sizing: border-box;
   line-height: 1.2;
   margin-top: 3px; /* Align with input baseline */
+  user-select: none;
 }
 
 /* Required asterisk */
@@ -77,14 +78,14 @@
 }
 
 /* Input Styling */
-.windows-form input[type="text"],
-.windows-form input[type="email"],
-.windows-form input[type="password"],
-.windows-form input[type="number"],
-.windows-form input[type="tel"],
+.windows-form input[type='text'],
+.windows-form input[type='email'],
+.windows-form input[type='password'],
+.windows-form input[type='number'],
+.windows-form input[type='tel'],
 .windows-form textarea,
 .windows-form select {
-  font: 9pt "Segoe UI", "SegoeUI", "Noto Sans", sans-serif;
+  font: 9pt 'Segoe UI', 'SegoeUI', 'Noto Sans', sans-serif;
   border: 1px solid #8e8f8f;
   border-radius: 3px;
   padding: 4px 6px;
@@ -93,6 +94,7 @@
   box-sizing: border-box;
   width: 100%;
   max-width: 300px; /* Prevent inputs from getting too wide */
+  user-select: none;
 }
 
 .windows-form input:focus,
@@ -115,7 +117,8 @@
 .windows-form textarea {
   resize: vertical;
   min-height: 60px;
-  font-family: "Consolas", "Courier New", monospace;
+  font-family: 'Consolas', 'Courier New', monospace;
+  user-select: none;
 }
 
 /* Select styling */
@@ -126,6 +129,7 @@
   background-repeat: no-repeat;
   background-position: right 8px center;
   padding-right: 28px;
+  user-select: none;
 }
 
 /* Checkbox and Radio Styling */
@@ -135,7 +139,7 @@
   margin-bottom: 4px;
 }
 
-.checkbox-wrapper input[type="checkbox"] {
+.checkbox-wrapper input[type='checkbox'] {
   width: auto;
   max-width: none;
   margin: 0;
@@ -152,14 +156,14 @@
   margin-bottom: 4px;
 }
 
-.radio-item input[type="radio"] {
+.radio-item input[type='radio'] {
   width: auto;
   max-width: none;
   margin: 0;
 }
 
 .radio-item label {
-  font: 9pt "Segoe UI", "SegoeUI", "Noto Sans", sans-serif;
+  font: 9pt 'Segoe UI', 'SegoeUI', 'Noto Sans', sans-serif;
   color: #000;
   cursor: pointer;
   user-select: none;
@@ -169,7 +173,7 @@
 .form-error {
   color: #d42c00;
   font-size: 8pt;
-  font: 8pt "Segoe UI", "SegoeUI", "Noto Sans", sans-serif;
+  font: 8pt 'Segoe UI', 'SegoeUI', 'Noto Sans', sans-serif;
   margin-top: 2px;
   display: flex;
   align-items: center;
@@ -177,7 +181,7 @@
 }
 
 .form-error::before {
-  content: "⚠";
+  content: '⚠';
   color: #d42c00;
   font-size: 10pt;
 }
@@ -211,17 +215,17 @@
   .form-overlay {
     padding: 20px;
   }
-  
+
   .windows-form {
     --form-label-width: 100px;
   }
-  
+
   .form-row {
     flex-direction: column;
     align-items: stretch;
     gap: 4px;
   }
-  
+
   .form-label {
     width: auto;
     min-width: auto;
@@ -230,7 +234,7 @@
     padding-right: 0;
     margin-top: 0;
   }
-  
+
   .windows-form input,
   .windows-form textarea,
   .windows-form select {
@@ -248,16 +252,20 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideIn {
-  from { 
+  from {
     opacity: 0;
     transform: scale(0.9) translateY(-20px);
   }
-  to { 
+  to {
     opacity: 1;
     transform: scale(1) translateY(0);
   }

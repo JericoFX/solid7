@@ -1,4 +1,4 @@
-import { Component, For, Show } from 'solid-js';
+import { Component, For, Show, createMemo, createSignal } from 'solid-js';
 import { cn } from '../utils/cn';
 import { MenuItem } from '../types';
 
@@ -11,97 +11,98 @@ export interface NavBarProps {
   class?: string;
 }
 
+const DropdownMenu: Component<{
+  items: MenuItem[];
+  onItemClick?: (item: MenuItem) => void;
+}> = (props) => {
+  return (
+    <ul role='menu' class={cn({ 'user-select': 'none' })}>
+      <For each={props.items}>
+        {(item) => (
+          <li
+            role='menuitem'
+            class={cn({ 'has-divider': item.divider, 'user-select': 'none' })}
+            aria-disabled={item.disabled}
+          >
+            <Show when={!item.divider}>
+              <button
+                type='button'
+                disabled={item.disabled}
+                onClick={() => {
+                  if (!item.disabled) {
+                    item.onClick?.();
+                    props.onItemClick?.(item);
+                  }
+                }}
+              >
+                <Show when={item.icon}>
+                  <img src={item.icon} alt='' width='18' height='18' />
+                </Show>
+                {item.label}
+              </button>
+            </Show>
+          </li>
+        )}
+      </For>
+    </ul>
+  );
+};
+
 const NavBarItemComponent: Component<{ item: NavBarItem }> = (props) => {
-  const hasChildren = () => props.item.children && props.item.children.length > 0;
-  
+  const [isOpen, setIsOpen] = createSignal(false);
+  const hasChildren = createMemo(
+    () => props.item.children && props.item.children.length > 0
+  );
+
   const handleClick = () => {
-    if (!props.item.disabled && !hasChildren()) {
-      props.item.onClick?.();
+    if (!props.item.disabled) {
+      if (hasChildren()) {
+        setIsOpen(!isOpen());
+      } else {
+        props.item.onClick?.();
+      }
     }
   };
 
+  const handleItemClick = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <li 
-      role="menuitem"
+    <li
+      role='menuitem'
       tabindex={props.item.disabled ? -1 : 0}
       aria-disabled={props.item.disabled}
       aria-haspopup={hasChildren()}
+      aria-expanded={hasChildren() ? isOpen() : undefined}
       onClick={handleClick}
+      onFocusOut={(e) => {
+        // Close menu if focus moves outside the menu item and its children
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+          setIsOpen(false);
+        }
+      }}
     >
       <Show when={props.item.icon}>
-        <img src={props.item.icon} alt="" width="18" height="18" />
+        <img src={props.item.icon} alt='' width='18' height='18' />
       </Show>
       {props.item.label}
-      <Show when={hasChildren()}>
-        <ul role="menu">
-          <For each={props.item.children}>
-            {(childItem) => (
-              <li 
-                role="menuitem" 
-                class={cn({ 'has-divider': childItem.divider })}
-                aria-disabled={childItem.disabled}
-                tabindex={childItem.divider ? -1 : (childItem.disabled ? -1 : 0)}
-                aria-haspopup={childItem.children && childItem.children.length > 0}
-              >
-                <Show when={!childItem.divider}>
-                  <Show when={childItem.icon}>
-                    <img src={childItem.icon} alt="" width="18" height="18" />
-                  </Show>
-                  <Show when={!(childItem.children && childItem.children.length > 0)}>
-                    <button 
-                      type="button" 
-                      disabled={childItem.disabled}
-                      onClick={() => !childItem.disabled && childItem.onClick?.()}
-                    >
-                      {childItem.label}
-                    </button>
-                  </Show>
-                  <Show when={childItem.children && childItem.children.length > 0}>
-                    {childItem.label}
-                  </Show>
-                </Show>
-                <Show when={childItem.children && childItem.children.length > 0}>
-                  <ul role="menu">
-                    <For each={childItem.children}>
-                      {(grandchildItem) => (
-                        <li 
-                          role="menuitem" 
-                          class={cn({ 'has-divider': grandchildItem.divider })}
-                          aria-disabled={grandchildItem.disabled}
-                          tabindex={grandchildItem.divider ? -1 : (grandchildItem.disabled ? -1 : 0)}
-                        >
-                          <Show when={!grandchildItem.divider}>
-                            <Show when={grandchildItem.icon}>
-                              <img src={grandchildItem.icon} alt="" width="18" height="18" />
-                            </Show>
-                            <button 
-                              type="button" 
-                              disabled={grandchildItem.disabled}
-                              onClick={() => !grandchildItem.disabled && grandchildItem.onClick?.()}
-                            >
-                              {grandchildItem.label}
-                            </button>
-                          </Show>
-                        </li>
-                      )}
-                    </For>
-                  </ul>
-                </Show>
-              </li>
-            )}
-          </For>
-        </ul>
+      <Show when={hasChildren() && isOpen()}>
+        <DropdownMenu
+          items={props.item.children!}
+          onItemClick={handleItemClick}
+        />
       </Show>
     </li>
   );
 };
 
 export const NavBar: Component<NavBarProps> = (props) => {
-  const navClass = () => cn('can-hover', props.class);
+  const navClass = createMemo(() => cn('can-hover', props.class));
 
   return (
     // 7.css menubar styling is applied automatically to ul[role=menubar]
-    <ul role="menubar" class={navClass()}>
+    <ul role='menubar' style={{ 'user-select': 'none' }} class={navClass()}>
       <For each={props.items}>
         {(item) => <NavBarItemComponent item={item} />}
       </For>

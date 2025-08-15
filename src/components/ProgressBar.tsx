@@ -1,4 +1,4 @@
-import { Component, mergeProps } from 'solid-js';
+import { Component, mergeProps, Show } from 'solid-js';
 import { cn } from '../utils/cn';
 import { ProgressBarProps } from '../types';
 
@@ -7,7 +7,6 @@ export const ProgressBar: Component<ProgressBarProps> = (props) => {
 
   const progressClass = () => {
     return cn(
-      'progressbar', // Base class for 7.css styling
       {
         paused: merged.paused,
         error: merged.error,
@@ -32,12 +31,14 @@ export const ProgressBar: Component<ProgressBarProps> = (props) => {
       aria-valuemax={merged.max}
       class={progressClass()}
     >
-      <div
-        style={{
-          width: `${Math.round(percentage())}%`,
-          transition: 'width 0.3s ease-in-out',
-        }}
-      ></div>
+      <Show when={!merged.marquee}>
+        <div
+          style={{
+            width: `${Math.round(percentage())}%`,
+            transition: 'width 0.3s ease-in-out',
+          }}
+        ></div>
+      </Show>
     </div>
   );
 };

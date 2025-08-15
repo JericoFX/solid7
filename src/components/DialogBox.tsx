@@ -1,4 +1,5 @@
 import { Component, Show, For } from 'solid-js';
+import { Portal } from 'solid-js/web';
 import { cn } from '../utils/cn';
 import { Window } from './Window';
 import './dialog.css';
@@ -43,51 +44,53 @@ export const DialogBox: Component<DialogBoxProps> = (props) => {
 
   return (
     <Show when={props.isOpen}>
-      <div class="dialog-overlay" onClick={handleOverlayClick}>
-        <div class={dialogClass()}>
-          <Window
-            title={props.title || 'Dialog'}
-            onClose={props.onClose}
-            active
-            width="400px"
-          >
-            <div class="dialog-content">
-              <Show when={props.icon || props.message}>
-                <div class="dialog-message">
-                  <Show when={props.icon}>
-                    <span class="dialog-icon">{getIconSymbol(props.icon)}</span>
-                  </Show>
-                  <Show when={props.message}>
-                    <span class="dialog-text">{props.message}</span>
-                  </Show>
-                </div>
-              </Show>
-              
-              <Show when={props.children}>
-                <div class="dialog-body">
-                  {props.children}
-                </div>
-              </Show>
-              
-              <Show when={props.buttons && props.buttons.length > 0}>
-                <div class="dialog-buttons">
-                  <For each={props.buttons}>
-                    {(button) => (
-                      <button
-                        class={cn({ 'default': button.variant === 'default' })}
-                        disabled={button.disabled}
-                        onClick={button.onClick}
-                      >
-                        {button.label}
-                      </button>
-                    )}
-                  </For>
-                </div>
-              </Show>
-            </div>
-          </Window>
+      <Portal>
+        <div class={cn('dialog-overlay')} onClick={handleOverlayClick}>
+          <div class={dialogClass()}>
+            <Window
+              title={props.title || 'Dialog'}
+              onClose={props.onClose}
+              active
+              width="400px"
+            >
+              <div class={cn('dialog-content')}>
+                <Show when={props.icon || props.message}>
+                  <div class={cn('dialog-message')}>
+                    <Show when={props.icon}>
+                      <span class={cn('dialog-icon')}>{getIconSymbol(props.icon)}</span>
+                    </Show>
+                    <Show when={props.message}>
+                      <span class={cn('dialog-text')}>{props.message}</span>
+                    </Show>
+                  </div>
+                </Show>
+                
+                <Show when={props.children}>
+                  <div class={cn('dialog-body')}>
+                    {props.children}
+                  </div>
+                </Show>
+                
+                <Show when={props.buttons && props.buttons.length > 0}>
+                  <div class={cn('dialog-buttons')}>
+                    <For each={props.buttons}>
+                      {(button) => (
+                        <button
+                          class={cn({ 'default': button.variant === 'default' })}
+                          disabled={button.disabled}
+                          onClick={button.onClick}
+                        >
+                          {button.label}
+                        </button>
+                      )}
+                    </For>
+                  </div>
+                </Show>
+              </div>
+            </Window>
+          </div>
         </div>
-      </div>
+      </Portal>
     </Show>
   );
 };

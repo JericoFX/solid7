@@ -1,7 +1,8 @@
-import { Component, JSX, Show } from 'solid-js';
+import { Component, JSX, Show, For } from 'solid-js';
 import { WindowProps } from '../types';
 import { WindowHeader } from './WindowHeader';
 import { cn } from '../utils/cn';
+import './window.css';
 
 export const Window: Component<WindowProps> = (props) => {
   const windowClass = () => {
@@ -31,14 +32,18 @@ export const Window: Component<WindowProps> = (props) => {
   });
 
   const windowBodyStyle = (): JSX.CSSProperties => {
-    // If window has a fixed height, calculate body height by subtracting title bar height
+    // If window has a fixed height, calculate body height by subtracting title bar and status bar height
     if (props.height) {
+      const titleBarHeight = '2.2rem'; // Standard title bar height in 7.css
+      const statusBarHeight = props.statusBar ? '1.5rem' : '0rem'; // Status bar height when present
       return {
-        height: 'calc(100% - 2.2rem)' // Standard title bar height is 2.2rem in 7.css
+        height: `calc(100% - ${titleBarHeight} - ${statusBarHeight})`
       };
     }
     return {};
   };
+
+  const statusBarClass = () => cn('status-bar');
 
   return (
     <div class={windowClass()} style={windowStyle()}>
@@ -56,6 +61,17 @@ export const Window: Component<WindowProps> = (props) => {
       <div class={windowBodyClass()} style={windowBodyStyle()}>
         {props.children}
       </div>
+      <Show when={props.statusBar}>
+        <div class={statusBarClass()}>
+          <For each={props.statusBar?.fields}>
+            {(field) => (
+              <div class={cn('status-bar-field')}>
+                {field.content}
+              </div>
+            )}
+          </For>
+        </div>
+      </Show>
     </div>
   );
 };

@@ -16,9 +16,16 @@ export interface WindowProps extends BaseProps {
   onClose?: () => void;
   onMinimize?: () => void;
   onMaximize?: () => void;
+  statusBar?: {
+    fields: Array<{
+      id: string;
+      content: JSX.Element | string;
+    }>;
+  };
 }
 
-export interface ButtonProps extends Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'class'> {
+export interface ButtonProps
+  extends Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'class'> {
   class?: string;
   variant?: 'default' | 'normal';
 }
@@ -59,7 +66,8 @@ export interface MenuProps extends BaseProps {
   items: MenuItem[];
 }
 
-export interface SliderProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'type' | 'class'> {
+export interface SliderProps
+  extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'type' | 'class'> {
   class?: string;
   hasBoxIndicator?: boolean;
   vertical?: boolean;
@@ -72,18 +80,27 @@ export interface StatusBarProps extends BaseProps {
   }>;
 }
 
-export interface CheckboxProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'type' | 'class'> {
+export interface CheckboxProps
+  extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'type' | 'class'> {
   class?: string;
   label?: string;
 }
 
-export interface RadioProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'type' | 'class'> {
+export interface RadioProps
+  extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'type' | 'class'> {
   class?: string;
   label?: string;
   name: string;
+  disabled?: boolean;
 }
 
-export interface SelectProps extends Omit<JSX.SelectHTMLAttributes<HTMLSelectElement>, 'class'> {
+export interface ScrollbarProps extends BaseProps {
+  height?: string;
+  width?: string;
+}
+
+export interface SelectProps
+  extends Omit<JSX.SelectHTMLAttributes<HTMLSelectElement>, 'class'> {
   class?: string;
   options: Array<{
     value: string;
@@ -92,7 +109,8 @@ export interface SelectProps extends Omit<JSX.SelectHTMLAttributes<HTMLSelectEle
   }>;
 }
 
-export interface SearchBoxProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'type' | 'class'> {
+export interface SearchBoxProps
+  extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'type' | 'class'> {
   class?: string;
 }
 
@@ -175,7 +193,16 @@ export interface NotepadMenuBarProps extends BaseProps {
 export interface FormField {
   id: string;
   label: string;
-  type: 'text' | 'email' | 'password' | 'number' | 'tel' | 'textarea' | 'select' | 'checkbox' | 'radio';
+  type:
+    | 'text'
+    | 'email'
+    | 'password'
+    | 'number'
+    | 'tel'
+    | 'textarea'
+    | 'select'
+    | 'checkbox'
+    | 'radio';
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
